@@ -1213,9 +1213,20 @@
   resolved "https://registry.npmjs.org/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
   integrity sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==
 
-"@data-modelling-tool/core@link:../web/packages/dmt-core":
-  version "0.0.0"
-  uid ""
+"@development-framework/dm-core@1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@development-framework/dm-core/-/dm-core-1.0.9.tgz#81f0b734af87d8196cc1a1ffd145a5ad111621db"
+  integrity sha512-zBRL4dWaiy+12bVq78iU/YNJm90R85UMOb29rGnoCPI6Pv3rGoQd38vxC8CIhF+pqGNIag49a01SLPcwUv7sxQ==
+  dependencies:
+    "@equinor/eds-core-react" "^0.20.0"
+    "@equinor/eds-icons" "^0.12.0"
+    "@equinor/eds-tokens" "^0.7.0"
+    axios "^0.27.2"
+    lodash "^4.17.19"
+    react-icons "3.11.0"
+    react-is "^17.0.2"
+    react-notifications "^1.7.4"
+    react-oauth2-code-pkce "^1.6.1"
 
 "@docsearch/css@3.2.1":
   version "3.2.1"
@@ -7025,6 +7036,11 @@ react-notifications@^1.7.4:
     classnames "^2.1.1"
     prop-types "^15.5.10"
     react-transition-group "^4.4.1"
+
+react-oauth2-code-pkce@^1.6.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/react-oauth2-code-pkce/-/react-oauth2-code-pkce-1.7.1.tgz#34bf265aac67397cc5d45567ebb08d1e6a3e0beb"
+  integrity sha512-caH4/vbHJ3ho00GMqmWk3RT+YkhtESIVhK4q2MZDTEISqUtHDZEeY8A8dIeZJCzIIYjtLmqOKmDNA03YPHsXVQ==
 
 react-popper@2.3.0:
   version "2.3.0"
