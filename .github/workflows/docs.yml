@@ -1,10 +1,9 @@
-name: build adocs
+name: build docs
 
 on:
   push:
     branches:
-    - master
-    - docs
+    - main
 
 jobs:
   deploy-docs:
