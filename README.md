@@ -28,7 +28,7 @@ pre-commit run -a
 
 ## Contributing 
 
-Read our [contributors' guide](https://https://equinor.github.io/dm-docs/contribute-guide.html) to get started.
+Read our [contributors' guide](https://equinor.github.io/dm-docs/contributing) to get started.
 
 [license-badge]: https://img.shields.io/badge/License-MIT-yellow.svg
 [license]: https://github.com/equinor/dm-docs/blob/master/LICENSE
