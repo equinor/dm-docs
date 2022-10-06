@@ -11,7 +11,6 @@ const clientDir = path.join(__dirname, '..', 'client');
 
 const LibrariesToTranspile = [
     'copy-text-to-clipboard',
-    '@data-modelling-tool/core'
 ];
 
 const LibrariesToTranspileRegex = new RegExp(
@@ -33,10 +32,10 @@ function excludeJS(modulePath) {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-    title: 'Data Modelling Tool',
+    title: 'Data Modelling Docs',
     tagline: 'An application for modelling, searching, and viewing domain models based on blueprints.',
     url: 'https://data-modelling-tool.app.radix.equinor.com/',
-    baseUrl: '/data-modelling-tool/',
+    baseUrl: '/dm-docs/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'warn',
     // favicon: 'img/favicon.ico',
@@ -44,7 +43,7 @@ const config = {
     // GitHub pages deployment config.
     // If you aren't using GitHub pages, you don't need these.
     organizationName: 'equinor', // Usually your GitHub org/user name.
-    projectName: 'data-modelling-tool', // Usually your repo name.
+    projectName: 'dm-docs', // Usually your repo name.
 
     // Even if you don't use internalization, you can use this field to set useful
     // metadata like html lang. For example, if your site is Chinese, you may want
@@ -80,8 +79,7 @@ const config = {
                     // @ts-ignore
                     rule.include = [
                         fs.realpathSync(path.join(__dirname)),
-                        fs.realpathSync(path.join(__dirname, 'node_modules/@data-modelling-tool/core/src')),
-                        fs.realpathSync(path.join(__dirname, '../web/packages/dmt-core')),
+                        fs.realpathSync(path.join(__dirname, 'node_modules/@development-framework/dm-core/src')),
                     ]
                     config.resolve.alias["react"] = path.resolve(__dirname, './node_modules/react')
                     config.resolve.alias["react-dom"] = path.resolve(__dirname, './node_modules/react-dom')
@@ -148,7 +146,7 @@ const config = {
                         label: 'Community',
                     },
                     {
-                        href: 'https://github.com/equinor/data-modelling-tool',
+                        href: 'https://github.com/equinor/dm-docs',
                         label: 'GitHub',
                         position: 'right',
                     },
@@ -171,7 +169,7 @@ const config = {
                         items: [
                             {
                                 label: 'GitHub Issues',
-                                href: 'https://github.com/equinor/data-modelling-tool/issues',
+                                href: 'https://github.com/equinor/dm-docs/issues',
                             }
                         ],
                     },
@@ -184,7 +182,7 @@ const config = {
                             },
                             {
                                 label: 'GitHub',
-                                href: 'https://github.com/equinor/data-modelling-tool',
+                                href: 'https://github.com/equinor/dm-docs',
                             },
                         ],
                     },
