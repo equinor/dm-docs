@@ -5,10 +5,10 @@ sidebar_position: 1
 
 ## Init a new instance
 
-Clone the **data modelling tool** repository.
+Clone the **data modelling docs** repository.
 
 ```bash
-git clone git@github.com:equinor/data-modelling-tool.git
+git clone git@github.com:equinor/dm-docs.git
 ```
 
 ## Install pre-commit
