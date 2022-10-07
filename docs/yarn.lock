@@ -1214,10 +1214,10 @@
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
   integrity sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==
 
-"@development-framework/dm-core@1.0.12":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@development-framework/dm-core/-/dm-core-1.0.12.tgz#4f6eef89b4cdcf6d77045f60b8dffba4e3bb94d3"
-  integrity sha512-iiPIEx7xQ1rAOyEYPI/2XN9JnuLmeM0zUzFC9HSkgygKwRc/2nzssNUkuYAw5ZAm3UO9/eynQra72BTq/yBl2w==
+"@development-framework/dm-core@1.0.13":
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/@development-framework/dm-core/-/dm-core-1.0.13.tgz#4fd009e7660c304a9a34cfccf27b9adc5b647e4e"
+  integrity sha512-F/MEohIu+NI+4H0BN/gqCyv0RNj/xRZ1x4rO0pgQpxw9N67L8DTzIN7jeg9x6M0BdGCK48fQFVeL4P6Ni0le+A==
   dependencies:
     "@equinor/eds-core-react" "^0.20.0"
     "@equinor/eds-icons" "^0.12.0"
