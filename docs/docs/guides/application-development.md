@@ -75,7 +75,7 @@ docker compose run --rm dmss reset-app
 # Job data 
 docker compose run --rm job-api dm reset --url http://dmss:5000 ../app
 # App-specific data
-dm reset app
+dm -u http://localhost:5000 reset app
 ```
 
 This must be done every time a modification is done in any file related to a service.
