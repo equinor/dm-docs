@@ -73,7 +73,7 @@ To populate DMSS, run:
 # Core data
 docker compose run --rm dmss reset-app
 # Job data 
-docker compose run --rm job-api dm reset app
+docker compose run --rm job-api dm reset --url http://dmss:5000 ../app
 # App-specific data
 dm reset app
 ```
@@ -100,6 +100,3 @@ URLs to external services are defined by environment variables in the start and 
 ### Adding a job handler
 
 To add a job handler, follow the guide at [dm-job](https://github.com/equinor/dm-job#job-handler-plugins).
-
-
-
