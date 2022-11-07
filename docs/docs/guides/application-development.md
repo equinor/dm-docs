@@ -96,6 +96,33 @@ URLs to external services are defined by environment variables in the start and 
 
 ### Adding a UI plugin
 
+An example plugin is located at `/src/plugins/demo-app`.
+The requirements for a plugin is to have a `index[.js|.ts|.tsx|.jsx]` which exports a list of plugins, for example:
+
+```tsx
+import { EPluginType } from '@development-framework/dm-core'
+
+import App from './App'
+
+export const plugins: any = [
+  {
+    pluginName: 'demoApp',
+    pluginType: EPluginType.PAGE,
+    component: App,
+  }
+]
+```
+
+With that done, you must explicitly set which plugins to import into the project. This is done in the `src/plugins.js` file. Which will then look like this:
+
+```js
+const plugins = [
+    import("./plugins/demo-app"),
+]
+
+export default plugins
+
+```
 
 ### Adding a job handler
 
