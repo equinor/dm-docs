@@ -1,3 +1,6 @@
 label: 'Libraries'
 position: 5
-collapsed: false
+collapsed: true
+link:
+  type: generated-index
+  description: List of available libraries
