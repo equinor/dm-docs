@@ -32,8 +32,8 @@ function excludeJS(modulePath) {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-    title: 'Data Modelling Docs',
-    tagline: 'An application for modelling, searching, and viewing domain models based on blueprints.',
+    title: 'Development Framework Docs',
+    tagline: 'The framework concists of a collection of libraries, tools and services that can be used to accelerate the building process and maintaince of applications and domain models based on blueprints.',
     url: 'https://data-modelling-tool.app.radix.equinor.com/',
     baseUrl: '/dm-docs/',
     onBrokenLinks: 'throw',
@@ -126,7 +126,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
         ({
             navbar: {
-                title: 'Data Modelling Tool',
+                title: 'Development Framework',
                 //logo: {
                 //    alt: 'My Site Logo',
                 //    src: 'img/logo.svg',
