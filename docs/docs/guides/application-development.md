@@ -94,36 +94,6 @@ URLs to external services are defined by environment variables in the start and 
 
 ## Extending the app
 
-### Adding a UI plugin
+Add functionality and customize your apps using [plugins](./../concepts/plugins.md) and [recipes](./../concepts/recipes.md).
 
-An example plugin is located at `/src/plugins/demo-app`.
-The requirements for a plugin is to have a `index[.js|.ts|.tsx|.jsx]` which exports a list of plugins, for example:
-
-```tsx
-import { EPluginType } from '@development-framework/dm-core'
-
-import App from './App'
-
-export const plugins: any = [
-  {
-    pluginName: 'demoApp',
-    pluginType: EPluginType.PAGE,
-    component: App,
-  }
-]
-```
-
-With that done, you must explicitly set which plugins to import into the project. This is done in the `src/plugins.js` file. Which will then look like this:
-
-```js
-const plugins = [
-    import("./plugins/demo-app"),
-]
-
-export default plugins
-
-```
-
-### Adding a job handler
-
-To add a job handler, follow the guide at [dm-job](https://github.com/equinor/dm-job#job-handler-plugins).
+See [plugin development](./plugin-development.md) for creating and adding new plugins.
