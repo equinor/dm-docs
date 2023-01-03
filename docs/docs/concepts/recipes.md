@@ -33,7 +33,7 @@ A StorageRecipes may look something like this;
 ```
 
 This StorageRecipes is used for the core `dmss://system/SIMOS/Package`-type. Here we can see that any objects that are a 
-part of the "content" attribute for a package, are not contained in that package entity, but is only referred to. Which makes sense logically.
+part of the "content" attribute for a package, is not contained in that package entity but is only referred to. Which makes sense logically.  Instead of the actual object, a reference object is added, and it includes the name, type, and _id of the object referenced. 
 
 ## UiRecipe
 
