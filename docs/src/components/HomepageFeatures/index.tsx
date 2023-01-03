@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import styles from './styles.module.css';
 import Link from "@docusaurus/Link";
 import { Icon } from '@equinor/eds-core-react'
-import { launch, widgets,build_wrench } from '@equinor/eds-icons'
+import { launch, widgets,build_wrench, apps } from '@equinor/eds-icons'
 
-Icon.add({ launch, widgets, build_wrench})
+Icon.add({ launch, widgets, build_wrench, apps })
 
 type FeatureItem = {
     title: string;
@@ -16,21 +16,27 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
     {
+        title: 'App Development',
+        icon: (<Icon name="apps" />),
+        to: "/docs/guides/application-development",
+        description: "Create data modelling apps"
+    },
+    {
         title: 'Plugin Development',
         icon: (<Icon name="widgets" />),
         to: "/docs/guides/plugin-development",
-        description: "Extend and customize"
+        description: "Create plugins to extend and customize apps"
     },
     {
         title: 'Administration',
         icon: (<Icon name="launch" />),
-        description: "Get up and running",
+        description: "Start hosting data modelling services",
         to: "/docs/guides/administration",
     },
     {
         title: 'Core Development',
         icon: (<Icon name="build_wrench" />),
-        description: "Contribute to core functionality",
+        description: "Contribute to core",
         to: "/docs/guides/development",
     }
 ];
