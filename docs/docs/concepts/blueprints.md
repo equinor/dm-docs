@@ -51,9 +51,9 @@ In the example above, you can find out, by looking at its attributes: `name`, `t
 
 The `name` should reflects what the model is.
 
-For blueprints, the `type` should be a reference to `system/SIMOS/Blueprint`, which is the Blueprint that is used to describe all other blueprints. 
+For blueprints, the `type` should be a reference to [`system/SIMOS/Blueprint`][Blueprint], which is the Blueprint that is used to describe all other blueprints. 
 
-For each blueprint attribute, the `type` should be a reference to `system/SIMOS/BlueprintAttribute`, which is the Blueprint that describe the attributes for Blueprints.
+For each blueprint attribute, the `type` should be a reference to [`system/SIMOS/BlueprintAttribute`][BlueprintAttribute], which is the Blueprint that describe the attributes for Blueprints.
 
 ### system/SIMOS/Blueprint
 
@@ -148,3 +148,6 @@ An entity of the `Car` blueprint can look like this.
 ```
 
 By looking at the `type` keyword, we can see that it's of type `Car`.
+
+[Blueprint]: https://github.com/equinor/data-modelling-storage-service/blob/master/src/home/system/SIMOS/Blueprint.json
+[BlueprintAttribute]: https://github.com/equinor/data-modelling-storage-service/blob/master/src/home/system/SIMOS/BlueprintAttribute.json
