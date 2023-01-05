@@ -1,4 +1,4 @@
 ---
 title: Deployment and configuration
-sidebar_position: 3
+sidebar_position: 5
 ---

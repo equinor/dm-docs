@@ -1,7 +1,8 @@
 ---
-title: Plugin development
-sidebar_position: 1
+sidebar_position: 3
 ---
+
+# Plugin development
 
 ## Apps plugins
 
