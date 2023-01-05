@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Application development 
@@ -95,6 +95,15 @@ The UI plugin is defined in the application blueprint, which can be seen at `app
 URLs to external services are defined by environment variables in the start and build scripts inside `package.json`.
 
 ## Extending the app
+
+### Models
+
+Add models using [blueprints](./../concepts/blueprints.md).
+
+
+See [domain modeling](./domain-modeling.md) for how to create and add models for the app.
+
+### Plugins
 
 Add functionality and customize your apps using [plugins](./../concepts/plugins.md) and [recipes](./../concepts/recipes.md).
 
