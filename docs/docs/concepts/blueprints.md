@@ -16,8 +16,6 @@ A blueprint is a model and an instance of a blueprint is called an entity.
 
 A blueprint is described in [JSON](https://www.json.org/json-en.html). 
 
-It is an JSON object that maps keys to values.
-
 Below is a short version of a Car blueprint. 
 
 ```json
@@ -41,15 +39,31 @@ Below is a short version of a Car blueprint.
 ```
 Any blueprint can be understood by simply looking at it. 
 
-In the example above, you can find out, by looking at its attributes: `name`, `type` and `attributes`. 
+By looking at the attributes `name`, `type` and `attributes` in the example above, you can find out that:
 
-* That it represent a Car model 
+* It represents a Car model 
 * It is of type `system/SIMOS/Blueprint`
 * It has the two attributes `name` and `description`.
 
+## What is an entity?
+
+An entity populates the attributes of the blueprint with real values.
+
+An entity of the `Car` blueprint can look like this. 
+
+```json
+{
+   "type": "dmss://Car",
+   "name": "Volvo",
+   "description": "This is an typically car type used in Norway"
+}
+```
+
+By looking at the `type` keyword, we can see that it's of type `Car`.
+
 ## How to create a Blueprint?
 
-The `name` should reflects what the model is.
+The `name` should reflect what the model is, and should be written in camel case.
 
 For blueprints, the `type` should be a reference to [`system/SIMOS/Blueprint`][Blueprint], which is the Blueprint that is used to describe all other blueprints. 
 
@@ -59,33 +73,29 @@ For each blueprint attribute, the `type` should be a reference to [`system/SIMOS
 
 Has the following attributes, where the `name` and `type` is required.
 
-| Attribute        | Type                              | Description                                                                                            |
-|------------------|-----------------------------------|--------------------------------------------------------------------------------------------------------|
-| type             | string                            | A reference to the Blueprint type.                                                                     |
- | name             | string                            | The name of the blueprint                                                                              |
-| description      | string                            | More information about the model                                                                       |
-| extends          | string                            | A reference to another blueprint. The blueprint will inherit attributes from the referenced blueprint. |
-| attributes       | `system/SIMOS/BlueprintAttribute` | List of attributes.                                                                                    | 
-
-:::info
-
-An attribute that can be complex (reference to another blueprint) or primitive (string, integer, number, boolean). 
-
-:::
+| Attribute     | Type                              | Description                                                                                                     |
+|---------------|-----------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| type          | string                            | A reference to the Blueprint type.                                                                              |
+ | name          | string                            | The name of the blueprint                                                                                       |
+| description   | string                            | More information about the model                                                                                |
+| extends       | string                            | A list of references to other blueprints. The blueprint will inherit attributes from the referenced blueprints. |
+| attributes    | `system/SIMOS/BlueprintAttribute` | List of attributes.                                                                                             | 
 
 ### system/SIMOS/BlueprintAttribute
 
-Has the following attributes, where the `attributeType` and `type` is required.  
+Has the following attributes, where the `name`, `attributeType` and `type` is required.  
 
-| Attribute     | Type     | Description                                                                                                                                                                                                |
-|---------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| attributeType | string   | The attribute type. Can be a reference to another blueprint, or a primitive type (string, integer, number, boolean).                                                                                       |
-| name          | string   | Name of the attribute.                                                                                                                                                                                     |
-| contained     | boolean  | Describes the conceptual belonging of one entity to another. In other words, if an entity must always be considered in the context of it's "parent" (true), or the entity has meaning on it's own (false). |
-| dimensions    | string   | Degree of dimensions. Format; A list of integers, each integer defines the size of a dimension. "*"(wildcard) has the special meaning of "unfixed size                                                     |
-| optional      | boolean  | If the attribute is optional or required                                                                                                                                                                   |
-| default       | any json | Default value for the attribute. Same type as the attribute itself                                                                                                                                         |
-| enumType      | string   | A reference to an Enum entity. Value should hold the chosen enum value in the entity                                                                                                                       |
+| Attribute        | Type          | Description                                                                                                                                                                                                |
+|------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type             | string        | A reference to the BlueprintAttribute type.                                                                                                                                                                |
+| attributeType    | string        | The attribute type. Can be a reference to another blueprint, or a primitive type (string, integer, number, boolean).                                                                                       |
+| name             | string        | Name of the attribute.                                                                                                                                                                                     |
+| description      | string        | Extra information                                                                                                                                                                                          |
+| contained        | boolean       | Describes the conceptual belonging of one entity to another. In other words, if an entity must always be considered in the context of it's "parent" (true), or the entity has meaning on it's own (false). |
+| dimensions       | string        | Degree of dimensions. Format; A list of integers, each integer defines the size of a dimension. "*"(wildcard) has the special meaning of "unfixed size                                                     |
+| optional         | boolean       | If the attribute is optional or required                                                                                                                                                                   |
+| default          | any json      | Default value for the attribute. Same type as the attribute itself                                                                                                                                         |
+| enumType         | string        | A reference to an Enum entity. Value should hold the chosen enum value in the entity                                                                                                                       |
 
 ## References 
 
@@ -133,21 +143,6 @@ subfolder/entity
 ../../subfolder/entity
 ```
 
-## Entity
-
-An entity populates the attributes of the blueprint with real values.
-
-An entity of the `Car` blueprint can look like this. 
-
-```json
-{
-   "type": "dmss://Car",
-   "name": "Volvo",
-   "description": "This is an typically car type used in Norway"
-}
-```
-
-By looking at the `type` keyword, we can see that it's of type `Car`.
 
 [Blueprint]: https://github.com/equinor/data-modelling-storage-service/blob/master/src/home/system/SIMOS/Blueprint.json
 [BlueprintAttribute]: https://github.com/equinor/data-modelling-storage-service/blob/master/src/home/system/SIMOS/BlueprintAttribute.json
