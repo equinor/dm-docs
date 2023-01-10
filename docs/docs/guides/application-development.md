@@ -73,9 +73,11 @@ To populate DMSS, run:
 # Core data
 docker compose run --rm dmss reset-app
 # Job data 
-docker compose run --rm job-api dm reset --url http://dmss:5000 ../app
+docker compose run --rm job-api dm reset ../app
 # App-specific data
-dm -u http://localhost:5000 reset app
+dm reset app
+# Create application specific recipe lookup
+dm create-lookup demo-app DemoApplicationDataSource/instances/recipe_links
 ```
 
 This must be done every time a modification is done in any file related to a service.
