@@ -129,7 +129,7 @@ For reference, _RecipeLinks_ may look like this;
 
 ### Default RecipeLinks
 
-To set an application wide default RecipeLink, you can create a RecipeLink with a `_blueprintPath_` set to `_default_`. All blueprints in your app that _does not have a specific RecipeLink_ will then use the recipes given in this `_default_` RecipeLink.
+To set an application wide default RecipeLink, you can create an entity of type RecipeLink with a `_blueprintPath_` set to `_default_`. All blueprints in your app that _does not have a specific RecipeLink_ will then use the recipes given in this `_default_` RecipeLink.
 
 As a last fallback, if no recipes are found from the Apps RecipeLookup, a set of builtin recipes will be provided.  
 Namely [YAML-view](https://github.com/equinor/dm-core-packages/tree/main/packages/yaml-view), and [form](https://github.com/equinor/dm-core-packages/tree/main/packages/form-edit).
