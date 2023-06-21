@@ -18,9 +18,14 @@ The blueprint attribute should have attribute type set to `binary`.
 
 ```json
 {
-  "type": "BlueprintAttribute",
-  "name": "<the attribute name>",
-  "attributeType": "binary"
+  "type": "Blueprint",
+  "attributes": [
+   {
+      "type": "BlueprintAttribute",
+      "name": "<the attribute name>",
+      "attributeType": "binary"
+    }
+  ]
 }
 ```
 
@@ -248,7 +253,7 @@ document = {
        "referenceType": "Storage"
     }
 }
-files = [('files', open('binaryFile.something', 'rb'))]
+files = [('data', open('binaryFile.something', 'rb'))]
 dmss_api.post(
     "dmss://data-source-1/root-package", data=document, files=files
 )
