@@ -167,8 +167,7 @@ The job of the data source is to determine which storage medium (repository) is 
 			"lookup_id": "1234",
 			"repository": "repository_a",
 			"database_id": "4568",
-			"acl": {},
-            "data-type": "blob"
+			"acl": {}
 		}
 	}
 }
@@ -188,21 +187,27 @@ To be able to decide that a data source ID is pointing to a binary data, we want
 
 ```json
 {
-  "documentLookUp": {
-     "1234": {
-        "lookup_id": "1234",
-        "repository": "repository-1",
-        "database_id": "5678",
-        "acl": {},
-        "storage_affinity": "blob",
-        "meta": {
-            "filename": "binaryFile.something"
-        }
-     }
-  }
+	"_id": "data-source-1",
+	"repositories": {
+		"repository_a": {
+			"type": "mongo-db",
+            "data-types": "blob"
+		}
+	},
+	"documentLookUp": {
+		"1234": {
+			"lookup_id": "1234",
+			"repository": "repository_a",
+			"database_id": "4568",
+			"acl": {},
+            "storage_affinity": "blob",
+            "meta": {
+                "filename": "binaryFile.something"
+            }
+		}
+	}
 }
 ```
-
 
 ### Model contained and storage contained
 
