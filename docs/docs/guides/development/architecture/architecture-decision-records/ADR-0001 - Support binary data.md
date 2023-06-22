@@ -50,7 +50,7 @@ This is when the blueprint attribute is specified as non-contained in a storage 
 
 #### From disk (using DM CLI)
 
-Any binary files on disk will need to be serialized before uploaded to the DMSS. 
+Any binary files on disk will need to be serialized before uploaded to the DMSS. Any file not ending with `.json` are treated as binary files. 
 
 ```mermaid
 flowchart 
@@ -85,7 +85,17 @@ The binary file will be uploaded to DMSS using DM CLI, and upon uploading DM CLI
 
 Note that the reference does not depend on the storage medium, i.e. the reference on the file system and the corresponding reference after uploading look exactly the same, except for the transformation of address.
 
-TODO: Is it possible to add the binaryFile.something file to the package content?
+TODO: Is it possible to add the binaryFile.something file to the package content, so that we can access it by an address with path?
+
+The binary files are uploaded before documents, using the `/blobs` endpoint, and we create a blob lookup table that we will use when we upload the documents.
+
+```
+{
+   "package/binaryFile.something": "1234"
+}
+```
+
+When we upload documents, we need to go through the document, and for any reference found that points to a binary file (not `.json` suffix), we will find the blob id by doing a lookup in the blob lookup table.
 
 
 #### From another service
@@ -165,7 +175,24 @@ flowchart LR
    L --> C["AzureBlobStorageRepository"]
 ```
 
-To be able to decide that a data source ID is pointing to a binary data, we want to add a field `data-type` to the lookup entry, that contain what type of data type is the lookup entry for, if it's a binary or not. This is because the repository implementation has different methods for getting and saving binary data (called update_blob, delete_blob, get_blob now). Each repository has the field data_types, and that specify if the repository support other data types like blob. 
+To be able to decide that a data source ID is pointing to a binary data, we want to add a field `storage_affinity` to the lookup entry, that contain what type of data type is the lookup entry for, if it's a binary or not. This is because the repository implementation has different methods for getting and saving binary data (called update_blob, delete_blob, get_blob now). Each repository has the field data_types, and that specify if the repository support other data types like blob. To add meta information, we add a field `meta`, so that we kan keep extra information like filename.
+
+```json
+{
+  "documentLookUp": {
+     "1234": {
+        "lookup_id": "1234",
+        "repository": "repository-1",
+        "database_id": "5678",
+        "acl": {},
+        "storage_affinity": "blob",
+        "meta": {
+            "filename": "binaryFile.something"
+        }
+     }
+  }
+}
+```
 
 
 ### Model contained and storage contained
@@ -277,7 +304,7 @@ TODO: Is this correct?s
 
 ## Other considered options  
 
-Create a wrapper upon import by using the DM CLI:
+Create a wrapper upon import when using the DM CLI:
 
 ```json
 {
@@ -305,5 +332,3 @@ Create a wrapper upon import by using the DM CLI:
 ```
 
 ## Consequences
-
-- [ ] Add to the blueprint attribute `binary` as possible attribute type
