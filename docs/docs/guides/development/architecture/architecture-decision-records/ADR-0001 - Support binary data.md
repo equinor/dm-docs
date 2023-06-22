@@ -14,15 +14,15 @@ WIP
 
 ## Decision 
 
-The blueprint attribute should have attribute type set to `binary`.
+We will introduce a new attribute type called `binary`.
 
 ```json
 {
-  "type": "Blueprint",
+  "type": "MyBlueprint",
   "attributes": [
    {
       "type": "BlueprintAttribute",
-      "name": "<the attribute name>",
+      "name": "binaryAttribute",
       "attributeType": "binary"
     }
   ]
@@ -31,26 +31,33 @@ The blueprint attribute should have attribute type set to `binary`.
 
 ### Model contained and storage non-contained
 
-This is when the blueprint attribute is specified as non-contained in a storage recipe.
+This is when the attribute is specified as non-contained in a storage recipe, as show below:
 
 ```json 
 {
-  "type": "dmss://system/SIMOS/StorageRecipe",
-  "name": "DefaultStorageRecipe",
-  "description": "",
-  "attributes": [
-	{
-	  "name": "<the attribute name>",
-	  "type": "dmss://system/SIMOS/StorageAttribute",
-	  "contained": false
-	}
+  "type": "dmss://system/SIMOS/RecipeLink",
+  "_blueprintPath_": "MyBlueprint",
+  "storageRecipes": [
+    {
+      "type": "dmss://system/SIMOS/StorageRecipe",
+      "name": "DefaultStorageRecipe",
+      "attributes": [
+        {
+          "name": "binaryAttribute",
+          "type": "dmss://system/SIMOS/StorageAttribute",
+          "contained": false
+        }
+      ]
+    }
   ]
 }
 ```
 
-#### From disk (using DM CLI)
+#### Different use cases
 
-Any binary files on disk will need to be serialized before uploaded to the DMSS. Any file not ending with `.json` are treated as binary files. 
+##### From DM CLI
+
+Any binary files on disk will need to be serialized before uploaded to the DMSS.
 
 ```mermaid
 flowchart 
@@ -59,11 +66,13 @@ flowchart
    dmss -- insert -->DB
 ```
 
+Note that DM CLI does not use storage recipe to check if the file is binary, it only checks the filename extension.  The DM CLI will treat any file not ending with `.json` as a binary files. 
+
 On disk the reference will point to a binary file using alias and path. The reference type is set to "Storage", that indicates that the binary data is model contained, but not storage contained.
 
 ```json
 {
-    "<the attribute name>": {
+    "binaryAttribute": {
        "type": "Reference",
        "address": "ALIAS:/package/binaryFile.something",
        "referenceType": "Storage"
@@ -75,7 +84,7 @@ The binary file will be uploaded to DMSS using DM CLI, and upon uploading DM CLI
 
 ```json
 {
-    "<the attribute name>": {
+    "binaryAttribute": {
        "type": "Reference",
        "address": "dmss://data-source-1/$1234",
        "referenceType": "Storage"
@@ -87,7 +96,7 @@ Note that the reference does not depend on the storage medium, i.e. the referenc
 
 TODO: Is it possible to add the binaryFile.something file to the package content, so that we can access it by an address with path?
 
-The binary files are uploaded before documents, using the `/blobs` endpoint, and we create a blob lookup table that we will use when we upload the documents.
+The binary files are uploaded before documents, using the `/blobs` endpoint, and at the same time we will create a blob lookup table that we will use when we upload the documents.
 
 ```
 {
@@ -95,10 +104,9 @@ The binary files are uploaded before documents, using the `/blobs` endpoint, and
 }
 ```
 
-When we upload documents, we need to go through the document, and for any reference found that points to a binary file (not `.json` suffix), we will find the blob id by doing a lookup in the blob lookup table.
+When we upload documents, we need to go through the document, and for any reference found that points to a binary file (not `.json`), we will find the blob id by doing a lookup in the blob lookup table and use that inside the address.
 
-
-#### From another service
+##### From another service
 
 ```mermaid
 flowchart 
@@ -110,7 +118,7 @@ Then the binary data needs to be uploaded first, and a reference needs to insert
 
 ```json
 {
-    "<the attribute name>": {
+    "binaryAttribute": {
        "type": "Reference",
        "address": "dmss://data-source-1/$1234",
        "referenceType": "Storage"
@@ -118,7 +126,7 @@ Then the binary data needs to be uploaded first, and a reference needs to insert
 }
 ```
 
-#### From frontend
+##### From frontend
 
 ```mermaid
 flowchart 
@@ -130,13 +138,14 @@ Then the binary data needs to be uploaded first, and a reference needs to insert
 
 ```json
 {
-    "<the attribute name>": {
+    "binaryAttribute": {
        "type": "Reference",
        "address": "dmss://data-source-1/$1234",
        "referenceType": "Storage"
     }
 }
 ```
+
 
 #### Data Source ID
 
