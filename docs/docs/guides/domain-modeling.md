@@ -70,8 +70,7 @@ have any object value in its `someEntity` attribute.
       "name": "objectEntity",
       "numberValue": 1232,
       "booleanValue": false
-    },
-   ...
+    }
 }
 ```
 
