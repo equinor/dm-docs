@@ -58,7 +58,7 @@ have any object value in its `someEntity` attribute.
       }
    ]
 }
-````
+```
 
 
 ```json
@@ -73,7 +73,7 @@ have any object value in its `someEntity` attribute.
     },
    ...
 }
-````
+```
 
 
 
