@@ -25,9 +25,6 @@ The framework consists of several services, tools, libraries, and applications t
 
 * [Data modeling core packages] contains published [libraries](/docs/category/libraries) like the core frontend package and UI plugins.
 
-### Applications
-
-* [Data modeling tool] is a web-based tool for modeling, searching, viewing data models that are based on blueprints.
 
 [Data modeling job API]: https://github.com/equinor/dm-job
 [data modeling CLI]: https://github.com/equinor/dm-cli
