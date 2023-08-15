@@ -45,8 +45,9 @@ Below is a short version of a Car blueprint.
 
 What can we read out of this code?
 
-- Line 2 and 4 contains the name and description of the blueprint, which tells us that this blueprint can be used to describe a car.
+- Line 2 contains the name of the blueprint, which is used when referring to this blueprint.
 - Line 3 contains the type of the blueprint. The word `type` carries some extra meaning in the Development Framework since it tells us which blueprint a blueprint or entity is implementing. In this case, it tells us that this JSON object is of type [dmss://system/SIMOS/Blueprint][Blueprint], and will therefore have attributes such as `name`, `type`, `description` and `attributes`. If you open the URL, you can see that it links to a blueprint with name Blueprint and type `dmss://system/SIMOS/Blueprint`. That means that the Blueprint blueprint actually implements itself!
+- Line 4 contains the description of the blueprint, which tells us that this blueprint can be used to describe a car.
 - Line 5 to 21 list the attributes of the blueprint - `type`, `carModel` and `registrationNumber`. All entities implementing this blueprint must have these three attributes, and only them. An attribute definition is always an implementation of the [dmss://system/SIMOS/BlueprintAttribute][BlueprintAttribute], hence the type.
 
 ## What is an entity?
@@ -63,7 +64,7 @@ An entity of the `Car` blueprint described above can look like this:
 }
 ```
 
-Notice how the `type` attribute referes to the blueprint we wrote above? For more info about how to reference blueprints, see [References to other blueprints](#references).
+Notice how the `type` attribute refers to the name attribute of the blueprint we wrote above? For more info about how to reference blueprints, see [References to other blueprints](#references).
 
 ## How to create a Blueprint?
 
@@ -89,18 +90,18 @@ Has the following attributes, where `name` and `type` is required.
 
 Has the following attributes, where `name`, `attributeType` and `type` is required.
 
-| Attribute     | Type     | Description                                                                                                                                                                                                                                                                                    |
-| ------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name          | string   | Name of the attribute.                                                                                                                                                                                                                                                                         |
-| type          | string   | A reference to the BlueprintAttribute type.                                                                                                                                                                                                                                                    |
-| description   | string   | Extra information                                                                                                                                                                                                                                                                              |
-| attributeType | string   | The attribute type. Can be a reference to another blueprint, or a primitive type (string, integer, number, boolean).                                                                                                                                                                           |
-| dimensions    | string   | Degree of dimensions, formatted as a comma separated list of integers or `*`. `*`(wildcard) has the special meaning of "unfixed size". Ex: `*` (1D of infinite length), `2,2` (2D of size 2x2), `3,*` (2D, where the inner array have infinite length)                                         |
-| label         | string   | A pretty variant of the attribute name, used to display the attribute name in a user friendly manner.                                                                                                                                                                                          |
-| default       | any json | Default value for the attribute. Same type as the attribute itself                                                                                                                                                                                                                             |
-| optional      | boolean  | If the attribute is optional or required                                                                                                                                                                                                                                                       |
-| contained     | boolean  | Describes the conceptual belonging of one entity to another. A contained attribute is owned by the document listing it, and will be deleted alongside its parent. An uncontained attribute is owned by another document. This attribute only make sense if the attributeType is non-primitive. |
-| enumType      | string   | A reference to an Enum entity. Value should hold the chosen enum value in the entity                                                                                                                                                                                                           |
+| Attribute     | Type     | Description                                                                                                                                                                                                                                                          |
+| ------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name          | string   | Name of the attribute.                                                                                                                                                                                                                                               |
+| type          | string   | A reference to the BlueprintAttribute type.                                                                                                                                                                                                                          |
+| description   | string   | Extra information                                                                                                                                                                                                                                                    |
+| attributeType | string   | The attribute type. Can be a reference to another blueprint, or a primitive type (string, integer, number, boolean).                                                                                                                                                 |
+| dimensions    | string   | Degree of dimensions, formatted as a comma separated list of integers or `*`. `*`(wildcard) has the special meaning of "unfixed size". Ex: `*` (1D of infinite length), `2,2` (2D of size 2x2), `3,*` (2D, where the inner array have infinite length)               |
+| label         | string   | A pretty variant of the attribute name, used to display the attribute name in a user friendly manner.                                                                                                                                                                |
+| default       | any json | Default value for the attribute. Same type as the attribute itself                                                                                                                                                                                                   |
+| optional      | boolean  | If the attribute is optional or required                                                                                                                                                                                                                             |
+| contained     | boolean  | Can be used for non-primitive attributes to describes the conceptual belonging of one entity to another. A contained attribute is owned by the document listing it, and will be deleted alongside its parent. An uncontained attribute is owned by another document. |
+| enumType      | string   | Can be used as an extra limitation on primitive attributes. Ex: Setting attributeType to string and enumType to [dmss://system/SIMOS/enums/StorageTypes][StorageTypes] will limit the valid options to "default", "blob", "video", "large" and "veryLarge".          |
 
 ## References to other blueprints {#references}
 
@@ -148,3 +149,4 @@ _By dotted_ - Relative from the file (UNIX directory traversal)
 
 [Blueprint]: https://github.com/equinor/data-modelling-storage-service/blob/master/src/home/system/SIMOS/Blueprint.json
 [BlueprintAttribute]: https://github.com/equinor/data-modelling-storage-service/blob/master/src/home/system/SIMOS/BlueprintAttribute.json
+[StorageTypes]: https://github.com/equinor/data-modelling-storage-service/blob/master/src/home/system/SIMOS/enums/StorageTypes.json
