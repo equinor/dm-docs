@@ -109,45 +109,64 @@ Has the following attributes, where `name`, `attributeType` and `type` is requir
 
 It is possible to reference other blueprint from the `type`, `extends`, `attributeType`, and `_blueprintPath_` attributes.
 
-There are several ways to describe a reference to other blueprints, all of which are understood and resolved during import.
+There are several ways to describe a reference to other blueprints, all of which are understood and resolved during import. For example, if you write in your local .json file the
+address `CORE:Blueprint` or `./blueprints/Car` and upload the blueprints to dmss, then those addresses will be translated to for example `dmss://system/SIMOS/Blueprint` 
+and `dmss://DemoDataSource/carPackage/Car` before the documents are saved in the database.
 
 Note that the reference is created using the name attribute of the blueprint you want to refer to, not its filename. I.e. "Car", not "Car.blueprint.json".
 
-_By URI_ - Full absolute path prefixed with protocol
+Example of address types:
 
-```
-dmss://datasource/package/entity
-dmss://datasource/package/subfolder/entity
-```
+| Address type            | Description                                                                                                        | Example                                                                                                                                                                                                                                                              |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| By path                 | Full absolute path prefixed with protocol                                                                          | ```dmss://datasource/package/entity``` or ```dmss://datasource/package/subfolder/entity```                                                                                                                                                                           |
+| By id                   | Refer to a document using id. The id must be prefixed with a `$` sign.                                             | ```dmss://datasource/$2d7c3249-985d-43d2-83cf-a887e440825a```                                                                                                                                                                                                        |
+| By alias                | Require dependencies to be defined somewhere in the source tree using [_meta_](./../concepts/meta.md) information. | ```ALIAS:package/entity``` or ```ALIAS:entity```                                                                                                                                                                                                                     |
+| By data source          | Relative from the destination data source.                                                                         | ```/package/entity``` or ```/package/subfolder/entity```                                                                                                                                                                                                             |
+| By Package              | Relative from the source package                                                                                   | ```entity``` or ```subfolder/entity```                                                                                                                                                                                                                               |
+| By dotted relative path | Relative from the file (UNIX directory traversal)                                                                  | ```./.../entity``` or  ```../subfolder/entity```or ```../../subfolder/entity```                                                                                                                                                                                                                  |
 
-_By Alias_ - Require dependencies to be defined somewhere in the source tree using [_meta_](./../concepts/meta.md) information.
 
-```
-ALIAS:package/entity
-ALIAS:entity
-```
+Other syntax option  - these will work together with the address types in the above table.
 
-_By data source_ - Relative from the destination data source.
+| Type                    | Description                                            | Example                                                                         |
+|-------------------------|--------------------------------------------------------|---------------------------------------------------------------------------------|
+| Dot                     | Reference a complex attribute inside an entity         | ```dmss://datasource/carPackage/car.engine.fuelPump```                          |
+| Brackets                | Use brackets + index to refer to list elements.        | ```dmss://datasource/carPackage/car.wheels[0]```                                |
+| Hat                     | Use the `^` syntax to refer to the document itself.    | ```"^.cars[1]"```, Also see example below                                       |         
 
-```
-/package/entity
-/package/subfolder/entity
-```
 
-_By package_ - Relative from the source package
 
-```
-entity
-subfolder/entity
-```
 
-_By dotted_ - Relative from the file (UNIX directory traversal)
 
+Example of hat syntax :
+```json
+{
+  "name": "Hertz",
+  "type": "./blueprints/CarRentalCompany",
+  "cars": [
+    {
+      "type": "./blueprints/Car",
+      "plateNumber": "1337",
+      "name": "Volvo"
+    }
+  ],
+  "customers": [
+    {
+      "type": "./blueprints/Customer",
+      "phoneNumber": 1337,
+      "name": "Jane",
+      "car": {
+        "address": "^.cars[0]",
+        "type": "CORE:Reference",
+        "referenceType": "link"
+      }
+    }
+  ]
+}
 ```
-./../entity
-../subfolder/entity
-../../subfolder/entity
-```
+Here, the address stored in `Hertz.customers[0].car.address` refers to `Hertz.cars[0]`. 
+
 
 [Blueprint]: https://github.com/equinor/data-modelling-storage-service/blob/master/src/home/system/SIMOS/Blueprint.json
 [BlueprintAttribute]: https://github.com/equinor/data-modelling-storage-service/blob/master/src/home/system/SIMOS/BlueprintAttribute.json
