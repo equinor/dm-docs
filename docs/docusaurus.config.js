@@ -204,6 +204,20 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      algolia: {
+      // The application ID provided by Algolia
+      appId: '6R4H64BKKF',
+
+      // Search API key. NB! This API key must NOT have access to anything other than search.
+      apiKey: '128a2fffd1b0aa5c7bd4e061e8a06982',
+
+      indexName: 'dm-docs-indices',
+
+      // Optional: see doc section below
+      contextualSearch: true,
+
+      //... other Algolia params
+    },
     }),
 }
 
