@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const TypeDoc = require('typedoc')
 const fs = require('fs')
 const { exit } = require('process')
@@ -60,12 +61,7 @@ async function generate_json(entryPoints, tsConfig) {
  * @param {string} componentType The type of component. Affects the subdirectory in which the documentation is stored.
  * @param {string[]} scope Optional scope passed to React Live
  */
-async function write_mdx_file(
-  libraryName,
-  componentName,
-  componentType,
-  scope = []
-) {
+async function write_mdx_file(libraryName, componentName, componentType) {
   const codePreviewEnabled = codePreviewComponentTypes.includes(componentType)
   const mdxContent = `---
 title: ${componentName}
@@ -109,7 +105,7 @@ export const scope = { ${componentName} }
 }
 
 async function main() {
-  for (library of Object.keys(libraries)) {
+  for (const library of Object.keys(libraries)) {
     console.log(`=== Generating docs for '${library}'...`)
     const entryPoints = libraries[library].entryPoints
     const tsConfig = libraries[library].tsConfig

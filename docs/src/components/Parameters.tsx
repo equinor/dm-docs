@@ -26,15 +26,17 @@ export const Parameters = (props: TComponentDocPartProps) => {
         const reference = typeDocs.children.find(
           (child: any) => child.id === parameter.type.id
         )
-        const referenceChildren = reference.hasOwnProperty('children')
+        const referenceChildren = Object.prototype.hasOwnProperty.call(
+          reference,
+          'children'
+        )
           ? reference.children
           : reference.type.declaration.children ?? []
         referenceChildren.forEach((child: any, _index: number) => {
-          let parameterInfo = extractParameterInfo(child)
-          let row: TTableRow = {
+          const row: TTableRow = {
             _id: `${_index}`,
             name: `${child.name}`,
-            ...parameterInfo,
+            ...extractParameterInfo(child),
           }
           rows.push(row)
         })
@@ -43,11 +45,10 @@ export const Parameters = (props: TComponentDocPartProps) => {
         console.error(refErr)
       }
     } else {
-      let parameterInfo = extractParameterInfo(parameter)
-      let row: TTableRow = {
+      const row: TTableRow = {
         _id: `${index}`,
         name: parameter.name,
-        ...parameterInfo,
+        ...extractParameterInfo(parameter),
       }
       rows.push(row)
     }
