@@ -1,24 +1,58 @@
+default_stages: [pre-commit]
+default_install_hook_types: [pre-commit, commit-msg]
 repos:
-- repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v2.5.0
-  hooks:
-    - id: check-merge-conflict
-    - id: check-case-conflict
-    - id: check-json
-    - id: check-yaml
-    - id: detect-private-key
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-toml
+      - id: check-yaml
+      - id: pretty-format-json
+        args:
+          [--autofix, --no-sort-keys, "--top-keys=_id,name,type,description"]
+      - id: trailing-whitespace
+        exclude: ^.*\.(lock)$||^docs\/
+      - id: end-of-file-fixer
+        exclude: ^.*\.(lock)$||^docs\/
+      - id: mixed-line-ending
+        exclude: ^.*\.(lock)$||^docs\/
+      - id: detect-private-key
+      - id: no-commit-to-branch
+        args: [--branch, main]
+        stages: [commit-msg]
 
-- repo: https://github.com/pre-commit/mirrors-prettier
-  rev: v2.2.1
-  hooks:
-    - id: prettier
-      files: ^docs/.*\.(ts|tsx|js|css|html|json)$
-      args: ['--config=docs/.prettierrc.js', '--ignore-path=docs/.prettierignore']
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v2.3.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
 
-- repo: local
-  hooks:
-    - id: eslint
-      name: ESlint
-      entry: sh -c "cd docs; npm run lint:fix"
-      language: system
-      pass_filenames: false
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.0.2
+    hooks:
+      - id: prettier
+        files: ^docs/.*\.(ts|tsx|js|css|html)$
+        args:
+          ["--config=docs/.prettierrc.js", "--ignore-path=docs/.prettierignore"]
+
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: "v8.47.0"
+    hooks:
+      - id: eslint
+        files: \.[jt]sx?$ # *.js, *.jsx, *.ts and *.tsx
+        types: [file]
+        additional_dependencies:
+          - eslint
+          - eslint-config-react-app
+          - typescript
+          - "@typescript-eslint/parser"
+          - "@typescript-eslint/eslint-plugin"
+          - eslint-config-prettier # turns off all rules that might conflict with prettier
+          - eslint-plugin-jsx-a11y # checks accessibility rules on jsx elements
+          - eslint-plugin-prettier # runs prettier as an eslint rule
+          - eslint-plugin-react # react specific linting rules
+          - eslint-plugin-react-hooks # enforces the rules of hooks
+        args:
+          ["--config=docs/.eslintrc.json", "--ignore-path=docs/.eslintignore"]
