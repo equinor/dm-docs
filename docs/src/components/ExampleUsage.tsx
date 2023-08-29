@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { LiveProvider, LiveEditor, LivePreview, LiveError } from "react-live";
-import github from 'prism-react-renderer/themes/github';
-import dracula from 'prism-react-renderer/themes/dracula';
-import { useColorMode } from '@docusaurus/theme-common';
+import React, { useEffect, useState } from 'react'
+import { LiveProvider, LiveEditor, LivePreview, LiveError } from 'react-live'
+import github from 'prism-react-renderer/themes/github'
+import dracula from 'prism-react-renderer/themes/dracula'
+import { useColorMode } from '@docusaurus/theme-common'
 
 import { ErrorGroup } from './ErrorGroup'
-import { findBlockByTag } from "../utils";
+import { findBlockByTag } from '../utils'
 
-type ExampleUsageProps  = {
+type ExampleUsageProps = {
   typeDoc: any
   scope?: any
   preview?: boolean
   showErrors?: boolean
-};
+}
 
 export const ExampleUsage = (props: ExampleUsageProps) => {
   const { typeDoc, scope, preview, showErrors } = props
@@ -39,16 +39,16 @@ export const ExampleUsage = (props: ExampleUsageProps) => {
   }
 
   const exampleCodeDescription = usageBlock.content.find(
-    (content: any) => content.kind === "text"
-  )?.text;
+    (content: any) => content.kind === 'text'
+  )?.text
   // Extract the unformatted code block from the @usage block
   const exampleCodeRaw = usageBlock.content.find(
-    (content: any) => content.kind === "code"
-  )?.text;
+    (content: any) => content.kind === 'code'
+  )?.text
   if (!exampleCodeRaw) return errorGroup
   const exampleCode = exampleCodeRaw
     .replaceAll(/(^```|```$)/g, '') // replace prefix/suffix ticks
-    .trim(); // remove leading whitespace
+    .trim() // remove leading whitespace
 
   return (
     <>
@@ -71,5 +71,5 @@ export const ExampleUsage = (props: ExampleUsageProps) => {
         )}
       </LiveProvider>
     </>
-  );
-};
+  )
+}
