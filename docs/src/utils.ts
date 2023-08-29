@@ -8,7 +8,7 @@ export const findBlockByTag = (tag: string, typeDoc: any): any => {
 export const extractParameterInfo = (parameter: TParameterInfo) => {
   let type: string
   let description: string
-  let optional: string = parameter.flags?.isOptional ? 'True' : 'False'
+  const optional: string = parameter.flags?.isOptional ? 'True' : 'False'
   if (parameter.type.type === 'union') {
     type = parameter.type.types.map((type) => type.name).join(' | ')
     description =
@@ -27,7 +27,6 @@ export const extractParameterInfo = (parameter: TParameterInfo) => {
 }
 
 export const getParameters = (typeDoc: any) => {
-  let parameters = []
   if (typeDoc.signatures && typeDoc.signatures.length >= 1) {
     // Functions
     return typeDoc.signatures[0].parameters
@@ -38,5 +37,5 @@ export const getParameters = (typeDoc: any) => {
     // Enums
     return typeDoc.children
   }
-  return parameters
+  return []
 }
