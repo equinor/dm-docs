@@ -1,0 +1,14 @@
+name: On push to branch
+
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore:
+      - main
+      - gh-pages
+    tags-ignore:
+      - v*
+
+jobs:
+  run-tests:
+    uses: ./.github/workflows/tests.yml
