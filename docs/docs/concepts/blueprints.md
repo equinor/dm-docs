@@ -171,3 +171,101 @@ Here, the address stored in `Hertz.customers[0].car.address` refers to `Hertz.ca
 [Blueprint]: https://github.com/equinor/data-modelling-storage-service/blob/master/src/home/system/SIMOS/Blueprint.json
 [BlueprintAttribute]: https://github.com/equinor/data-modelling-storage-service/blob/master/src/home/system/SIMOS/BlueprintAttribute.json
 [StorageTypes]: https://github.com/equinor/data-modelling-storage-service/blob/master/src/home/system/SIMOS/enums/StorageTypes.json
+
+
+## Model and storage containment
+For entities, we have the concept of containment either on a model or storage level.
+
+### Model containment
+By `model contained`, we mean that an entity belongs inside another entity.
+This is determined by the boolean `contained` flag in the BlueprintAttribute. By default, contained is set to true.
+
+Model contained example:
+```json
+{
+  "name": "Jason",
+  "type": "./Employee",
+  "manager": {
+    "type": "./Employee",
+    "name": "Bill",
+    "age": 33
+  },
+  "age": 27
+}
+```
+For the employee `Jason`, the manager attribute is contained inside the entity.
+
+Model uncontained example:
+```json
+{
+  "name": "Jason",
+  "type": "./Employee",
+  "manager": {
+    "type": "dmss://system/SIMOS/Reference",
+    "address": "DataSoruce/apps/EmployeeApp/Bill",
+    "referenceType": "link"
+  },
+  "age": 27
+}
+```
+```json
+{
+  "type": "./Employee",
+  "name": "Bill",
+  "age": 33
+}
+```
+In this case, the manager attribute is a `link reference` to another entity stored somewhere in the database.
+
+When fetching an entity from dmss, a `depth` parameter can be included in the GET request to determine whether or not 
+the reference should be resolved.
+(Resolving a link reference means that a link reference is replaced by the actual entity the link reference points to.)
+
+If depth=0, the document will be returned without resolving any link references. If depth is higher than 1, references will be resolved.
+
+
+### Storage containment
+Unlike model containment, storage containment is defined in a blueprint's `RecipeLink` and not in the blueprint itself. 
+If not specified, storage containment is set to true for all attributes in a blueprint.
+
+Example fo storage uncontained:
+```json
+{
+  "type": "CORE:RecipeLink",
+  "_blueprintPath_": "dmss://DemoDataSource/apps/SimulationApp/blueprints/Simulation",
+  "uiRecipes": {},
+  "storageRecipes": [
+    {
+      "name": "DEFAULT",
+      "type": "dmss://system/SIMOS/StorageRecipe",
+      "description": "",
+      "attributes": [
+        {
+          "name": "bestSimulationResult",
+          "type": "dmss://system/SIMOS/StorageAttribute",
+          "contained": false
+        }
+      ]
+    }
+  ]
+}
+```
+
+Here, the recipe of the `Simulation` blueprint says that the attribute `bestSimulationResult` is storage uncontained. 
+
+This means that `bestSimulationResult` will be stored separately from the entity of type `Simulation` (in another document in the database).
+
+When modeling, it will look like this:
+```json
+{
+  "name": "simulation1",
+  "type": "DemoDataSource/apps/SimulationApp/blueprints/Simulation",
+  "bestSimulationResult": {
+    "type": "dmss://system/SIMOS/Reference",
+    "address": "dmss://DemoDataSource/apps/SimulationApp/results/bestResult2023",
+    "referenceType": "storage"
+  }
+}
+```
+Storage uncontained attributes will be stored as a storage reference in the entity.
+
