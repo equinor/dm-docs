@@ -14,8 +14,7 @@ See [docs/README.md](./docs/README.md) for instructions on extending the documen
 ### Pre-commit
 
 We use pre-commit to do a minimum of checks on the developer pc before committing. The same checks, plus a few more are
-also run in the build pipeline.  
-You should catch any errors early to save time.
+also run in the build pipeline. You should catch any errors early to save time.
 
 Setup;
 
