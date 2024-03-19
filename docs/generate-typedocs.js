@@ -23,7 +23,8 @@ const libraries = {
     entryPoints: [
       './node_modules/@development-framework/dm-core-plugins/src/index.tsx',
     ],
-    tsConfig: './node_modules/@development-framework/dm-core-plugins/tsconfig.json',
+    tsConfig:
+      './node_modules/@development-framework/dm-core-plugins/tsconfig.json',
   },
 }
 
