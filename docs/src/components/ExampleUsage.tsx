@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { LiveProvider, LiveEditor, LivePreview, LiveError } from 'react-live'
-import github from 'prism-react-renderer/themes/github'
-import dracula from 'prism-react-renderer/themes/dracula'
+import { themes } from 'prism-react-renderer'
 import { useColorMode } from '@docusaurus/theme-common'
 
 import { ErrorGroup } from './ErrorGroup'
@@ -24,7 +23,7 @@ export const ExampleUsage = (props: ExampleUsageProps) => {
 
   useEffect(() => {
     if (!colorMode) return
-    setCodeBlockTheme(colorMode === 'light' ? github : dracula)
+    setCodeBlockTheme(colorMode === 'light' ? themes.github : themes.dracula)
   }, [colorMode])
 
   // Find the "@usage" block, if present

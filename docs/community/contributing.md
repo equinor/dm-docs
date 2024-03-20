@@ -40,12 +40,12 @@ change [here](https://github.com/equinor/data-modelling-tool/issues/new?assignee
 
 ## Write documentation
 
-This site was generated from the contents of your `docs` folder using https://docusaurus.io/ and we host it on GitHub Pages.
+This site was generated from the contents of your `docs` folder using [https://docusaurus.io/](https://docusaurus.io/) and we host it on GitHub Pages.
 
 Documentation is important for users to understand the program and its features.
 The documentation is written in markdown, a simple markup language. It can be found in the `docs` folder.
 
-To start, please install yarn (<https://yarnpkg.com/getting-started/install>).
+To start, please install ([yarn](https://yarnpkg.com/getting-started/install)).
 
 Get started by running:
 
