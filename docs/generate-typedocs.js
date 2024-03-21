@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const TypeDoc = require('typedoc')
 const fs = require('fs')
+const TypeDoc = require('typedoc')
 const { exit } = require('process')
 
 // Path to write the typedocs to
@@ -13,18 +13,16 @@ const codePreviewComponentTypes = ['Components']
 
 // The libraries that should be documented
 const libraries = {
+  // '../../dm-core-packages/packages/dm-core': {
+  //   entryPoints: [
+  //     '../../dm-core-packages/packages/dm-core/src/index.tsx',
+  //   ],
+  //   tsConfig: '../../dm-core-packages/packages/dm-core/tsconfig.json',
+  // },
   '@development-framework/dm-core': {
     entryPoints: [
       './node_modules/@development-framework/dm-core/src/index.tsx',
     ],
-    tsConfig: './node_modules/@development-framework/dm-core/tsconfig.json',
-  },
-  '@development-framework/dm-core-plugins': {
-    entryPoints: [
-      './node_modules/@development-framework/dm-core-plugins/src/index.tsx',
-    ],
-    tsConfig:
-      './node_modules/@development-framework/dm-core-plugins/tsconfig.json',
   },
 }
 
@@ -35,16 +33,12 @@ const libraries = {
  * @param {string} tsConfig Path to the tsconfig.json for the given library
  */
 async function generate_json(entryPoints, tsConfig) {
-  const app = new TypeDoc.Application()
-
-  // Add reader for tsconfig
-  app.options.addReader(new TypeDoc.TSConfigReader())
-
-  app.bootstrap({
+  const app = await TypeDoc.Application.bootstrap({
     entryPoints: entryPoints,
     tsconfig: tsConfig,
     json: true,
   })
+  app.options.addReader(new TypeDoc.TSConfigReader())
 
   try {
     const project = app.convert()

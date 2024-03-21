@@ -9,7 +9,7 @@ Icon.add({ launch, widgets, build_wrench, apps })
 
 type FeatureItem = {
   title: string
-  icon: React.ComponentType
+  icon: React.ReactElement
   description: string
   to: string
 }
