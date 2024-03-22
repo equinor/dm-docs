@@ -21,8 +21,11 @@ const libraries = {
   // },
   '@development-framework/dm-core': {
     entryPoints: [
-      './node_modules/@development-framework/dm-core/src/index.tsx',
+      //'../../dm-core-packages/packages/dm-core/src/index.tsx',
+      './node_modules/@development_framework/dm-core/src/index.tsx',
+      // '/Users/PEBH/source/dm-docs/docs/node_modules/@development-framework/dm-core/src/index.tsx',
     ],
+    tsConfig: ['./node_modules/@development_framework/dm-core/tsconfig.json'],
   },
 }
 
@@ -33,15 +36,16 @@ const libraries = {
  * @param {string} tsConfig Path to the tsconfig.json for the given library
  */
 async function generate_json(entryPoints, tsConfig) {
+  console.log(entryPoints)
   const app = await TypeDoc.Application.bootstrap({
     entryPoints: entryPoints,
     tsconfig: tsConfig,
     json: true,
   })
-  app.options.addReader(new TypeDoc.TSConfigReader())
+  //app.options.addReader(new TypeDoc.TSConfigReader())
+  const project = await app.convert()
 
   try {
-    const project = app.convert()
     if (project) {
       // Generate JSON output
       await app.generateJson(project, typeDocsOutPath)
