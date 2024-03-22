@@ -13,20 +13,12 @@ const codePreviewComponentTypes = ['Components']
 
 // The libraries that should be documented
 const libraries = {
-  // '../../dm-core-packages/packages/dm-core': {
-  //   entryPoints: [
-  //     '../../dm-core-packages/packages/dm-core/src/index.tsx',
-  //   ],
-  //   tsConfig: '../../dm-core-packages/packages/dm-core/tsconfig.json',
-  // },
   '@development-framework/dm-core': {
     entryPoints: [
-      //'../../dm-core-packages/packages/dm-core/src/index.tsx',
-      './node_modules/@development_framework/dm-core/src/index.tsx',
-      // '/Users/PEBH/source/dm-docs/docs/node_modules/@development-framework/dm-core/src/index.tsx',
+      './node_modules/@development-framework/dm-core/src/index.tsx',
     ],
-    tsConfig: './node_modules/@development_framework/dm-core/tsconfig.json',
-  },
+    tsConfig: './node_modules/@development-framework/dm-core/tsconfig.json',
+  }
 }
 
 /**
