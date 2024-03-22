@@ -25,7 +25,7 @@ const libraries = {
       './node_modules/@development_framework/dm-core/src/index.tsx',
       // '/Users/PEBH/source/dm-docs/docs/node_modules/@development-framework/dm-core/src/index.tsx',
     ],
-    tsConfig: ['./node_modules/@development_framework/dm-core/tsconfig.json'],
+    tsConfig: './node_modules/@development_framework/dm-core/tsconfig.json',
   },
 }
 
