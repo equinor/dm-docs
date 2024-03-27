@@ -1,13 +1,13 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const webpack = require('webpack')
+import { ProvidePlugin } from 'webpack'
 const lightCodeTheme = require('prism-react-renderer').themes.github
 const darkCodeTheme = require('prism-react-renderer').themes.dracula
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin')
-const fs = require('fs')
-const path = require('path')
-const clientDir = path.join(__dirname, '..', 'client')
+import ModuleScopePlugin from 'react-dev-utils/ModuleScopePlugin'
+import { realpathSync } from 'fs'
+import { join, resolve as _resolve } from 'path'
+const clientDir = join(__dirname, '..', 'client')
 
 const LibrariesToTranspile = ['copy-text-to-clipboard']
 
@@ -15,6 +15,9 @@ const LibrariesToTranspileRegex = new RegExp(
   LibrariesToTranspile.map((libName) => `(node_modules/${libName})`).join('|')
 )
 
+/**
+ * @param {string} modulePath
+ */
 function excludeJS(modulePath) {
   // Always transpile client dir
   if (modulePath.startsWith(clientDir)) {
@@ -76,28 +79,28 @@ const config = {
           rule.exclude = excludeJS
           config.resolve.roots = [
             ...config.resolve.roots,
-            path.resolve(__dirname, '../web/packages/dmt-core'),
+            _resolve(__dirname, '../web/packages/dmt-core'),
           ]
           // @ts-ignore
           rule.include = [
-            fs.realpathSync(path.join(__dirname)),
-            fs.realpathSync(
-              path.join(
+            realpathSync(join(__dirname)),
+            realpathSync(
+              join(
                 __dirname,
-                '../../dm-core-packages/packages/dm-core/src'
+                './node_modules/@development-framework/dm-core/src'
               )
             ),
           ]
-          config.resolve.alias['react'] = path.resolve(
+          config.resolve.alias['react'] = _resolve(
             __dirname,
             './node_modules/react'
           )
-          config.resolve.alias['react-dom'] = path.resolve(
+          config.resolve.alias['react-dom'] = _resolve(
             __dirname,
             './node_modules/react-dom'
           )
           config.plugins.push(
-            new webpack.ProvidePlugin({
+            new ProvidePlugin({
               process: 'process/browser.js',
             })
           )
@@ -221,4 +224,4 @@ const config = {
     }),
 }
 
-module.exports = config
+export default config
