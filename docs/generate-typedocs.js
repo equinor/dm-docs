@@ -29,12 +29,15 @@ const libraries = {
  */
 async function generate_json(entryPoints, tsConfig) {
   console.log(entryPoints)
+
   const app = await TypeDoc.Application.bootstrap({
     entryPoints: entryPoints,
     tsconfig: tsConfig,
     json: true,
   })
-  //app.options.addReader(new TypeDoc.TSConfigReader())
+
+  app.options.addReader(new TypeDoc.TSConfigReader())
+
   const project = await app.convert()
 
   try {
