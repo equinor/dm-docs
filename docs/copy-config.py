@@ -35,7 +35,7 @@ for plugin, configs in plugins.items():
         destination_file.write("")
 
     for config in configs["config"]: 
-        source_path = f'../../dm-core-packages/packages/dm-core-plugins/blueprints/{folder}/{config}'
+        source_path = f'./node_modules/@development-framework/dm-core-plugins/blueprints/{folder}/{config}'
         # Read the contents from the source file
         try:
             with open(source_path, 'r') as source_file:
