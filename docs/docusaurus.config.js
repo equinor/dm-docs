@@ -84,7 +84,7 @@ const config = {
             fs.realpathSync(
               path.join(
                 __dirname,
-                'node_modules/@development-framework/dm-core/src'
+                '../../dm-core-packages/packages/dm-core/src'
               )
             ),
           ]
@@ -98,7 +98,7 @@ const config = {
           )
           config.plugins.push(
             new webpack.ProvidePlugin({
-              process: 'process/browser',
+              process: 'process/browser.js',
             })
           )
           return {

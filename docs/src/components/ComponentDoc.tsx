@@ -20,6 +20,7 @@ export const ComponentDoc = (props: ComponentDocProps) => {
   if (componentType === 'Components') parametersTitle = 'Props'
   else if (componentType === 'Enums') parametersTitle = 'Members'
   else if (componentType === 'Types') parametersTitle = 'Attributes'
+  // @ts-ignore
   const typeDoc = typeDocs.children.find(
     (child: any) => child.name === componentName
   )

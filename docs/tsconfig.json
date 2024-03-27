@@ -2,6 +2,7 @@
   "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
     "baseUrl": ".",
-    "strict": false
+    "strict": false,
+    "target": "ES2020"
   }
 }
