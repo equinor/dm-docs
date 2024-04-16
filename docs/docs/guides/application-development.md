@@ -134,49 +134,41 @@ npm run build
 
 ## Configure the app
 
-This template uses an application entity to control the behavior of the app. This entity can be seen at `app/data/DemoApplicationDataSource/instances/demoApplication.json`. The `.env`-file has a variable pointing to this application entity, which will be loaded and used to select what _UIPlugin_ to be shown. The application _RecipeLink_ that defines what to show is located at `app/data/DemoApplicationDataSource/DemoApplication/recipes/demoApp.json`. 
+This template uses an application entity to control the behavior of the app. This entity can be seen at `app/data/DemoDS/DemoApplication/entities/demoApplication.json`. The `.env`-file has a variable pointing to this application entity, which will be loaded and used to select what _UIPlugin_ to be shown. The application _RecipeLink_ that defines what to show is located at `app/data/DemoDS/DemoApplication/recipes/demoApp.json`. 
 
-URLs to services are controlled by environment variables in the `.env` file, by default this will point to the services specified in the `docker-compose.yaml` file. The `.env` file also controls authentication, and it is possible to enable or disable authentication. See [configuration](https://equinor.github.io/dm-docs/docs/guides/administration/configuration) for overview of the different configuration options available.
+URLs to services are controlled by environment variables in the `.env.local` file, by default this will point to the services specified in the `docker-compose.yaml` file. The `.env.local` file also controls authentication, and it's possible to enable or disable authentication. See [configuration](https://equinor.github.io/dm-docs/docs/guides/administration/configuration) for overview of the different configuration options available.
 
 ## Extending the app
 
-Add functionality and customize your apps using plugins. Apps is designed to be extensible, and one of the best ways to add functionality to apps is through the plugin system.
+DM Apps is designed to be extensible, and customizable.  
+This is achived via _plugins_ and _recipes_.
 
-Add functionality and customize your apps using [plugins](./../concepts/plugins.md) and [recipes](./../concepts/recipes.md).
+Read more about those concepts here;
+
+- [plugins](./../concepts/plugins.md)
+- [recipes](./../concepts/recipes.md)
 
 See [plugin development](./plugin-development.md) for creating and adding new plugins.
 
-## Modelling domain
+## Domain modelling
 
-Add models using [blueprints](./../concepts/blueprints.md).
+Models are defined using [blueprints](./../concepts/blueprints.md).
 
 See [domain modeling](./domain-modeling.md) for how to create and add models for the app.
 
-## Pre commit 
+## Pre-commit 
 
 To ensure consistent code formatting and to do a minimum of checks on the local computer before committing code to a Git repository, the app provides a `.pre-commit-config.yaml` file that is used to setup Git _pre-commit hooks_.
-The pre-commit hook will run [prettier](https://prettier.io/) formatting, certain tests, sanitisers and analyze the JavaScript code using [eslint](https://eslint.org/).
+The pre-commit hook will run formatting, certain tests, sanitisers, and analyze the code for quality and best practises.
 To run pre-commit, it needs to be installed on your local machine with
 
 ```bash
+# Install pre-commit
 pip install pre-commit
+# Register pre-commit hook
+pre-commit install
+# Run pre-commit manually on all files
+pre-commit run -a
+# Commit witouth running checks
+git commit --no-verify
 ```
-
-This tell pre-commit to always run for this repository on every commit.
-
-:::tip
-
-Pre-commit will run on every commit, but can also be run manually on all files:
-
-```shell
-pre-commit run --all-files
-```
-
-Or be skipped:
-
-```shell
-git commit --no-verify 
-```
-:::
-
-
