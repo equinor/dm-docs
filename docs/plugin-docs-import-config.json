@@ -1,0 +1,97 @@
+{
+  "header": {
+    "name": "HeaderPlugin",
+    "blueprints": ["HeaderPluginConfig.json"]
+  },
+  "grid": {
+    "name": "GridPlugin",
+    "blueprints": [
+      "GridPluginConfig.json",
+      "GridArea.json",
+      "GridItem.json",
+      "GridSize.json",
+      "GridBorder.json"
+    ]
+  },
+  "data_grid": {
+    "name": "DataGridPlugin",
+    "blueprints": ["DataGridPluginConfig.json"]
+  },
+  "form": {
+    "name": "FormPlugin",
+    "blueprints": [
+      "FormInput.json",
+      "FormFunctionalityConfig.json",
+      "fields/Field.json",
+      "fields/ArrayField.json",
+      "fields/BooleanField.json",
+      "fields/NumberField.json",
+      "fields/ObjectField.json",
+      "fields/StringField.json",
+      "widgets/DateTimeWidgetConfig.json",
+      "widgets/DimensionalScalarWidgetConfig.json",
+      "widgets/HyperlinkWidgetConfig.json",
+      "widgets/SelectWidgetConfig.json"
+    ]
+  },
+  "list": {
+    "name": "ListPlugin",
+    "blueprints": ["ListPluginConfig.json", "FunctionalityConfig.json"]
+  },
+  "media_viewer": {
+    "name": "MediaViewerPlugin",
+    "blueprints": ["MediaViewerConfig.json"]
+  },
+  "publish": { "name": "PublishPlugin", "blueprints": ["PublishConfig.json"] },
+  "responsive_grid": {
+    "name": "ResponsiveGridPlugin",
+    "blueprints": [
+      "ResponsiveGridPluginConfig.json",
+      "ColumnSize.json",
+      "RowItem.json",
+      "ColumnItem.json"
+    ]
+  },
+  "role_filter": {
+    "name": "RoleFilterPlugin",
+    "blueprints": ["RoleFilterConfig.json"]
+  },
+  "stack": { "name": "StackPlugin", "blueprints": ["StackPluginConfig.json"] },
+  "table": {
+    "name": "TablePlugin",
+    "blueprints": [
+      "TablePluginConfig.json",
+      "TableFunctionalityConfig.json",
+      "TableColumnConfig.json",
+      "TableVariantConfig.json"
+    ]
+  },
+  "tabs": {
+    "name": "TabsPlugin",
+    "folder": "view_selector",
+    "blueprints": [
+      "ViewSelectorConfig.json",
+      "ViewSelectorItem.json",
+      "RecipeSelectorConfig.json"
+    ]
+  },
+  "sidebar": {
+    "name": "SidebarPlugin",
+    "folder": "view_selector",
+    "blueprints": [
+      "ViewSelectorConfig.json",
+      "ViewSelectorItem.json",
+      "RecipeSelectorConfig.json"
+    ]
+  },
+  "job_create": {
+    "name": "JobCreatePlugin",
+    "folder": "job",
+    "blueprints": ["CreateConfig.json"]
+  },
+  "job_control": {
+    "name": "JobControlPlugin",
+    "folder": "job",
+    "blueprints": ["ControlConfig.json"]
+  }
+}
