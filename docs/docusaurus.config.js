@@ -2,8 +2,7 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 import { ProvidePlugin } from 'webpack'
-const lightCodeTheme = require('prism-react-renderer').themes.github
-const darkCodeTheme = require('prism-react-renderer').themes.dracula
+import { themes } from 'prism-react-renderer'
 import ModuleScopePlugin from 'react-dev-utils/ModuleScopePlugin'
 import { realpathSync } from 'fs'
 import { join, resolve as _resolve } from 'path'
@@ -35,7 +34,7 @@ function excludeJS(modulePath) {
 const config = {
   title: 'Development Framework',
   tagline:
-    'The frameworks goal is to accelerate and simplify the development and creation of applications. It especially shines when complex domain models already exists. DM can then quickly create a user interface, executable jobs, and storage backend for these models.',
+    'The framework consists of a collection of libraries, tools and services that can be used to accelerate the building process and maintenance of applications and domain models based on blueprints.',
   url: 'https://data-modelling-tool.app.radix.equinor.com/',
   baseUrl: '/dm-docs/',
   onBrokenLinks: 'throw',
@@ -204,8 +203,9 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Equinor`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: themes.vsLight,
+        darkTheme: themes.vsDark,
+        additionalLanguages: ["json", "bash"]
       },
       algolia: {
         // The application ID provided by Algolia
