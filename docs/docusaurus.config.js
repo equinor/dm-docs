@@ -33,9 +33,9 @@ function excludeJS(modulePath) {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Development Framework Docs',
+  title: 'Development Framework',
   tagline:
-    'The framework concists of a collection of libraries, tools and services that can be used to accelerate the building process and maintaince of applications and domain models based on blueprints.',
+    'The frameworks goal is to accelerate and simplify the development and creation of applications. It especially shines when complex domain models already exists. DM can then quickly create a user interface, executable jobs, and storage backend for these models.',
   url: 'https://data-modelling-tool.app.radix.equinor.com/',
   baseUrl: '/dm-docs/',
   onBrokenLinks: 'throw',

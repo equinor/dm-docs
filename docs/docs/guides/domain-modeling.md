@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Domain modeling
+# Domain modelling
 
 ## Adding a blueprint
 

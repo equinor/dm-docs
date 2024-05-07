@@ -19,7 +19,7 @@ const FeatureList: FeatureItem[] = [
     title: 'App Development',
     icon: <Icon name="apps" />,
     to: '/docs/guides/application-development',
-    description: 'Create data modelling apps',
+    description: 'Create an application',
   },
   {
     title: 'Plugin Development',
@@ -30,13 +30,13 @@ const FeatureList: FeatureItem[] = [
   {
     title: 'Administration',
     icon: <Icon name="launch" />,
-    description: 'Start hosting data modelling services',
+    description: 'Deploying and maintaining an application',
     to: '/docs/guides/administration',
   },
   {
     title: 'Core Development',
     icon: <Icon name="build_wrench" />,
-    description: 'Contribute to core',
+    description: 'Contribute to core packages and services',
     to: '/docs/guides/development',
   },
 ]
