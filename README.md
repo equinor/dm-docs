@@ -1,6 +1,6 @@
 # Data Modelling Docs
 [![License][license-badge]][license]
-[![build docs](https://github.com/equinor/dm-docs/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/equinor/dm-docs/actions/workflows/docs.yml)
+[build docs](https://github.com/equinor/dm-docs/actions/workflows/on-push-main.yml/badge.svg?branch=main)
 
 ## Documentation
 
