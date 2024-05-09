@@ -74,9 +74,8 @@ def create_example_files(config, destination_folder_path, base_source_path) -> N
         folder_path = os.path.join(destination_folder_path, "Examples")
         try:
             os.makedirs(folder_path, exist_ok=True)
-            print("Created folder Examples")
         except IOError as make_dir_error:
-            print(f"Unable to create folder Examples. {make_dir_error}")
+            print(f"Unable to create Examples folder for plugin {plugin_name}. {make_dir_error}")
 
         # Create example docs
         for example in files:
@@ -101,7 +100,6 @@ import {{ PluginExample }} from '@site/src/components'
 """)
 
                     example_destination_file.write(plugin_demo)
-                print(f"{plugin_name} {example} appended successfully.")
             except IOError as write_example_error:
                 print(f"Unable to write docs file for {example}. {write_example_error}")
 
@@ -123,7 +121,7 @@ def create_blueprints_file(doc_config, destination_folder, base_source_path):
             with open(f'{base_source_path}/{blueprint}', 'r') as source_file:
                 blueprints.append(json.load(source_file))
         except IOError as e:
-            print(f"Unable to process file. {e}")
+            print(f"Asked to import {blueprint}, but source could not be found in dm-core-plugins docs. {e}")
 
     try:
         with open(destination_filepath, 'a+') as destination_file:
@@ -133,7 +131,6 @@ def create_blueprints_file(doc_config, destination_folder, base_source_path):
                 <BlueprintPreview blueprints={{{json.dumps(blueprints)}}} />
                 """)
             destination_file.write(blueprints_file_content)
-            print(f"Blueprints created for {doc_config['name']}")
     except IOError as e:
         print(f"Unable to write blueprints file for {doc_config['name']}. {e}")
 
@@ -150,16 +147,18 @@ def copy_doc_files(docs_config, base_source_path, destination_folder_path):
     try:
         with open(documentation_file_oath, 'r') as doc_source_file:
             contents = doc_source_file.read()
-        with open(f'{destination_folder_path}/Documentation.md', 'a+') as destination_file:
-            header_content = dedent(f"""            ---
-            sidebar_position: 1
-            title: {plugin_name}
-            sidebar_label: Documentation
-            ---\n\n""")
-            destination_file.write(header_content + contents)
-        print(f"{plugin_name} documentation appended successfully.")
-    except IOError as e:
-        print(f"Unable to write docs file for {plugin_name}. {e}")
+            try:
+                with open(f'{destination_folder_path}/Documentation.md', 'a+') as destination_file:
+                    header_content = dedent(f"""            ---
+                    sidebar_position: 1
+                    title: {plugin_name}
+                    sidebar_label: Documentation
+                    ---\n\n""")
+                    destination_file.write(header_content + contents)
+            except IOError as e:
+                print(f"Unable to write docs file for {plugin_name}. {e}")
+    except IOError:
+        print(f"No documentation source file found for plugin {plugin_name}")
 
 
 def create_docs():
@@ -170,29 +169,33 @@ def create_docs():
     - Create examples (blueprint, entity, recipe code blocks + live demo) from 
       custom json-config stored in dm-core-plugins
     """
-    with open("./plugin-docs-import-config.json", "r") as f:
-        plugins = json.load(f)
+    try:
+        with open("./plugin-docs-import-config.json", "r") as f:
+            plugins = json.load(f)
 
-    if os.path.exists(DESTINATION_BASE_FOLDER):
-        shutil.rmtree(DESTINATION_BASE_FOLDER)
+        if os.path.exists(DESTINATION_BASE_FOLDER):
+            shutil.rmtree(DESTINATION_BASE_FOLDER)
 
-    for plugin, info in plugins.items():
-        # Define the source and destination paths
-        plugin_name = info["name"]
-        folder = info.get('folder') or plugin
-        base_source_path = f'{SOURCE_BASE_FOLDER}/{folder}'
-        docs_source_path = f'{base_source_path}/docs/{plugin}' if "folder" in info else f'{base_source_path}/docs'
-        destination_folder_path = f'{DESTINATION_BASE_FOLDER}/{plugin_name}'
-        os.makedirs(os.path.join(destination_folder_path, plugin_name), exist_ok=True)
+        for plugin, info in plugins.items():
+            # Define the source and destination paths
+            plugin_name = info["name"]
+            folder = info.get('folder') or plugin
+            base_source_path = f'{SOURCE_BASE_FOLDER}/{folder}'
+            docs_source_path = f'{base_source_path}/docs/{plugin}' if "folder" in info else f'{base_source_path}/docs'
+            destination_folder_path = f'{DESTINATION_BASE_FOLDER}/{plugin_name}'
+            os.makedirs(os.path.join(destination_folder_path, plugin_name), exist_ok=True)
 
-        # Generate example files based on config files in dm-core-plugins
-        create_example_files(info, destination_folder_path, docs_source_path)
+            # Generate example files based on config files in dm-core-plugins
+            create_example_files(info, destination_folder_path, docs_source_path)
 
-        # Create Blueprints file
-        create_blueprints_file(info, destination_folder_path, base_source_path)
+            # Create Blueprints file
+            create_blueprints_file(info, destination_folder_path, base_source_path)
 
-        # Copy docs and add docusaurus config at the top based on config
-        copy_doc_files(info, docs_source_path, destination_folder_path)
+            # Copy docs and add docusaurus config at the top based on config
+            copy_doc_files(info, docs_source_path, destination_folder_path)
+            
+    except IOError as e:
+        print(f"Could not find config file plugin-docs-import-config.json for documentation migration {e}")
 
 
 create_docs()
