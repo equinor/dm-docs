@@ -149,7 +149,7 @@ def copy_doc_files(docs_config, base_source_path, destination_folder_path):
             contents = doc_source_file.read()
             try:
                 with open(f'{destination_folder_path}/Documentation.md', 'a+') as destination_file:
-                    header_content = dedent(f"""            ---
+                    header_content = dedent(f"""                    ---
                     sidebar_position: 1
                     title: {plugin_name}
                     sidebar_label: Documentation
