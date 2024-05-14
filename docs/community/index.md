@@ -6,7 +6,7 @@ sidebar_position: 0
 title: "Community"
 ---
 
-The entierty of the Development Framework source code is under the MIT license, open for anyone to read, copy, deploy, and use however they wish. All repositories works under the "standard opensource model". If you wish to contribute, make sure to read the [contribution guide]("/contributing").
+The entirety of the Development Framework source code is under the MIT license, open for anyone to read, copy, deploy, and use however they wish. All repositories works under the "standard opensource model". If you wish to contribute, make sure to read the [contribution guide](./contributing).
 
 The best way to get in contact with the core development team would be to create an issue or start a discussion on Github.
 
