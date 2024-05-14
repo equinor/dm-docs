@@ -2,8 +2,8 @@ import React from 'react'
 import clsx from 'clsx'
 import Link from '@docusaurus/Link'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
-import "@development-framework/dm-core/dist/main.css"
-import "@development-framework/dm-core-plugins/dist/main.css"
+import '@development-framework/dm-core/dist/main.css'
+import '@development-framework/dm-core-plugins/dist/main.css'
 import Layout from '@theme/Layout'
 import HomepageFeatures from '@site/src/components/HomepageFeatures'
 

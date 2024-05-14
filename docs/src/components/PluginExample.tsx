@@ -38,7 +38,7 @@ const DemoWrapper = styled.div`
   }
 `
 
-export const BoxPlugin = ({ config }) => (
+export const BoxPlugin = ({ config }: { config: { content: any }}) => (
   <div
     style={{
       background: 'rgb(222 237 238)',
