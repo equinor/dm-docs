@@ -1,7 +1,9 @@
 {
   "header": {
     "name": "HeaderPlugin",
-    "blueprints": ["HeaderPluginConfig.json"]
+    "blueprints": [
+      "HeaderPluginConfig.json"
+    ]
   },
   "grid": {
     "name": "GridPlugin",
@@ -15,7 +17,9 @@
   },
   "data_grid": {
     "name": "DataGridPlugin",
-    "blueprints": ["DataGridPluginConfig.json"]
+    "blueprints": [
+      "DataGridPluginConfig.json"
+    ]
   },
   "form": {
     "name": "FormPlugin",
@@ -36,13 +40,23 @@
   },
   "list": {
     "name": "ListPlugin",
-    "blueprints": ["ListPluginConfig.json", "FunctionalityConfig.json"]
+    "blueprints": [
+      "ListPluginConfig.json",
+      "FunctionalityConfig.json"
+    ]
   },
   "media_viewer": {
     "name": "MediaViewerPlugin",
-    "blueprints": ["MediaViewerConfig.json"]
+    "blueprints": [
+      "MediaViewerConfig.json"
+    ]
   },
-  "publish": { "name": "PublishPlugin", "blueprints": ["PublishConfig.json"] },
+  "publish": {
+    "name": "PublishPlugin",
+    "blueprints": [
+      "PublishConfig.json"
+    ]
+  },
   "responsive_grid": {
     "name": "ResponsiveGridPlugin",
     "blueprints": [
@@ -54,9 +68,16 @@
   },
   "role_filter": {
     "name": "RoleFilterPlugin",
-    "blueprints": ["RoleFilterConfig.json"]
+    "blueprints": [
+      "RoleFilterConfig.json"
+    ]
   },
-  "stack": { "name": "StackPlugin", "blueprints": ["StackPluginConfig.json"] },
+  "stack": {
+    "name": "StackPlugin",
+    "blueprints": [
+      "StackPluginConfig.json"
+    ]
+  },
   "table": {
     "name": "TablePlugin",
     "blueprints": [
@@ -87,11 +108,15 @@
   "job_create": {
     "name": "JobCreatePlugin",
     "folder": "job",
-    "blueprints": ["CreateConfig.json"]
+    "blueprints": [
+      "CreateConfig.json"
+    ]
   },
   "job_control": {
     "name": "JobControlPlugin",
     "folder": "job",
-    "blueprints": ["ControlConfig.json"]
+    "blueprints": [
+      "ControlConfig.json"
+    ]
   }
 }
