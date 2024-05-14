@@ -93,7 +93,6 @@ export const PluginPreview = ({ exampleConfig }: TPluginExample) => {
   function getUiPlugin(
     pluginName: string
   ): (props: IUIPlugin) => React.ReactElement {
-    console.log(pluginName)
     const plugin = plugins[pluginName]?.component
     if (!plugin)
       return () => (
