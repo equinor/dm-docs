@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
                        xmlns:moz="http://www.mozilla.org/2006/browser/search/">
-  <ShortName>Development Framework Docs</ShortName>
-  <Description>Search Development Framework Docs</Description>
+  <ShortName>Development Framework</ShortName>
+  <Description>Search Development Framework</Description>
   <InputEncoding>UTF-8</InputEncoding>
   <Url type="text/html" method="get" template="https://data-modelling-tool.app.radix.equinor.com/dm-docs/search?q={searchTerms}"/>
   <Url type="application/opensearchdescription+xml" rel="self" template="https://data-modelling-tool.app.radix.equinor.com/dm-docs/opensearch.xml" />
