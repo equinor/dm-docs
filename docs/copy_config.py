@@ -179,8 +179,7 @@ def create_docs():
     """
     
     try:
-        with open("./plugin-docs-import-config.json", "r") as f:
-            plugins = [os.path.basename(x) for x in pathlib.Path().glob(f'{SOURCE_DOCS_FOLDER}/*')]
+        plugins = [os.path.basename(x) for x in pathlib.Path().glob(f'{SOURCE_DOCS_FOLDER}/*')]
 
         if os.path.exists(DESTINATION_BASE_FOLDER):
             shutil.rmtree(DESTINATION_BASE_FOLDER)
@@ -201,7 +200,6 @@ def create_docs():
             copy_doc_files(plugin, docs_source_path, destination_folder_path)
             
     except IOError as e:
-        print(f"Could not find config file plugin-docs-import-config.json for documentation migration {e}")
-
+        print(f"Could not auto-generate documentation. {e}")
 
 create_docs()
