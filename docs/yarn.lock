@@ -1233,12 +1233,12 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@development-framework/dm-core-plugins@>1.50.0":
-  version "1.50.4"
-  resolved "https://registry.yarnpkg.com/@development-framework/dm-core-plugins/-/dm-core-plugins-1.50.4.tgz#83c188c7e216ee0527ca6f4a5ba2734d25880e10"
-  integrity sha512-mgUkkXLPa56uQ9F61TTmZgl39ESNzf438J+b8DpoD99JHoqKNAvp9U90iSRiWVXEF9Em7K3+2ULt0roI0aIEZA==
+"@development-framework/dm-core-plugins@^1.53.0":
+  version "1.53.0"
+  resolved "https://registry.npmjs.org/@development-framework/dm-core-plugins/-/dm-core-plugins-1.53.0.tgz#f445521dfe66bdcd95154f25d88dca867202dd55"
+  integrity sha512-OTl+PFAoDJ/ea03MZ9BbtAZBosc9XkbW1rhF+MMS5TbCyH3dm0xv5JVlkK2Fx15f4UKfu4vxrmBP63JQKJWOOQ==
   dependencies:
-    "@development-framework/dm-core" "^1.43.3"
+    "@development-framework/dm-core" "^1.44.1"
     "@equinor/eds-core-react" ">0.33.0"
     "@equinor/eds-icons" ">0.19.3"
     "@equinor/eds-tokens" ">0.9.0"
@@ -1254,10 +1254,10 @@
     ts-node "^10.9.1"
     yaml "^2.3.2"
 
-"@development-framework/dm-core@>1.43.0", "@development-framework/dm-core@^1.43.3":
-  version "1.43.3"
-  resolved "https://registry.yarnpkg.com/@development-framework/dm-core/-/dm-core-1.43.3.tgz#1089b47881a0ae33865b50700a22436083945bf7"
-  integrity sha512-bfXqWnTLv3FNQuMgSh6b64DRF1XHrvO/ChSnMg1xJFq8K/F2ZzUPE6fTSEb2u/fPtsALkeJBvWUH8uFFr1lxTw==
+"@development-framework/dm-core@^1.44.1":
+  version "1.44.1"
+  resolved "https://registry.npmjs.org/@development-framework/dm-core/-/dm-core-1.44.1.tgz#1ca16d6b2ad5dd06a68e3bc55ae172af75e3efc9"
+  integrity sha512-h7JpYYdQo0x2uABku9yVgmU8vSZ6oLufIcrn0AU9fpWqYJefRpCDZT7V9CryTQ1h6YxI5tCuboMFQB1xFBOk2A==
   dependencies:
     "@dnd-kit/core" "^6.0.8"
     "@dnd-kit/modifiers" "^6.0.1"
