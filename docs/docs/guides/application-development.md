@@ -44,7 +44,7 @@ my-app/
 ```
 -->
 
-## Running the app
+## Starting services
 
 To run dependent services locally you can use the included `docker-compose.yaml` file. This file includes databases, DMSS service, and job service. 
 
@@ -55,23 +55,7 @@ docker-compose pull
 docker compose up
 ```
 
-To start the app development server, run:
-
-```bash
-npm start
-```
-
-The web app can now be reached at [http://localhost:3000](http://localhost:3000) in the web browser. The web page will automatically reload if you make changes to the code.
-You will see the build errors and lint warnings in the console.
-
-:::note 
-
-Remember: You must have the docker-compose services running to use the web application.
-
-:::
-
 ## Reset data
-
 
 Install the dm-cli package (available on [PyPi](https://pypi.org/project/dm-cli/)) by running: 
 
@@ -123,6 +107,24 @@ $ pip install --upgrade pip
 
 </details>
 </details>
+
+## Starting web application
+
+To start the app development server, run:
+
+```bash
+npm start
+```
+
+The web app can now be reached at [http://localhost:3000](http://localhost:3000) in the web browser. The web page will automatically reload if you make changes to the code.
+You will see the build errors and lint warnings in the console.
+
+:::note 
+
+Remember: You must have the docker-compose services running to use the web application.
+
+:::
+
 
 ## Build production version
 
