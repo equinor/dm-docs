@@ -1,6 +1,7 @@
 name: On push to main branch
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -30,6 +31,11 @@ jobs:
           cd docs
           yarn install
           yarn run generate-typedocs
+
+      - name: Generate plugin docs
+        run: |
+          cd docs
+          python3 copy_config.py
 
       - name: Build docs
         run: |
