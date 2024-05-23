@@ -1,4 +1,5 @@
-"""Copy and auto-generate documentation from dm-core-plugins package to docosaurus project."""
+"""Copy and auto-generate documentation from dm-core-plugins package to docosaurus project.
+Must be run from "./docs" folder."""
 import os
 import json
 import shutil
@@ -98,7 +99,7 @@ import {{ PluginExample }} from '@site/src/components'
 
 {create_code_blocks_section(example_config)}
 """)
-
+                    print(f"Writing example file {example_file_source_path} --> {folder_path}/{example}.mdx")
                     example_destination_file.write(plugin_demo)
             except IOError as write_example_error:
                 print(f"Unable to write docs file for {example}. {write_example_error}")
@@ -134,6 +135,7 @@ import {{ BlueprintPreview }} from "@site/src/components"
 
 <BlueprintPreview blueprints={{{json.dumps(blueprints)}}} />
                     """)
+                    print(f"Writing blueprints {docs_source_path} --> {destination_filepath}")
                     destination_file.write(blueprints_file_content)
                     
             except IOError as e:
@@ -162,6 +164,7 @@ def copy_doc_files(plugin, docs_source_path, destination_folder_path):
                     title: {plugin}
                     sidebar_label: Documentation
                     ---\n\n""")
+                    print(f"Writing docs file {documentation_file_path} --> {destination_folder_path}/Documentation.md")
                     destination_file.write(header_content + contents)
             except IOError as e:
                 print(f"Unable to write docs file for {plugin}. {e}")
@@ -180,15 +183,20 @@ def create_docs():
     
     try:
         plugins = [os.path.basename(x) for x in pathlib.Path().glob(f'{SOURCE_DOCS_FOLDER}/*')]
+        if not plugins:
+            print(f"No plugins found in {SOURCE_DOCS_FOLDER} folder. Run 'yarn install' to create 'node_modules'.")
+            print("Exiting...")
+            exit(2)
 
         if os.path.exists(DESTINATION_BASE_FOLDER):
             shutil.rmtree(DESTINATION_BASE_FOLDER)
 
         for plugin in plugins:
+            print(f"Creating docs for {plugin}")
             # Define the source and destination paths
             docs_source_path = f'{SOURCE_DOCS_FOLDER}/{plugin}'
             destination_folder_path = f'{DESTINATION_BASE_FOLDER}/{plugin}'
-            os.makedirs(os.path.join(destination_folder_path, plugin), exist_ok=True)
+            os.makedirs(destination_folder_path, exist_ok=True)
 
             # Generate example files based on config files in dm-core-plugins
             create_example_files(plugin, destination_folder_path, docs_source_path)
@@ -202,4 +210,5 @@ def create_docs():
     except IOError as e:
         print(f"Could not auto-generate documentation. {e}")
 
-create_docs()
+if __name__ == "__main__":
+    create_docs()
