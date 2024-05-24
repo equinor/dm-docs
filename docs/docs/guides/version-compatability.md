@@ -5,6 +5,10 @@ sidebar_position: 5
 
 ## Component version compatibility matrix
 
+:::warning
+The information on this page is not up-to-date
+:::
+
 The Development Framework has many different component, and not all versions of these
 are neccesarily compatible with one another.
 

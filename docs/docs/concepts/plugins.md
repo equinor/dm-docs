@@ -3,14 +3,32 @@ title: Plugins
 sidebar_position: 3
 ---
 
-Add functionality and customize your apps using plugins.
+You can extend the functionality of the system or your apps by using plugins.
 
-Apps is designed to be extensible, and one of the best ways to add functionality to apps is through the plugin system.
+As of now, there are three types of plugins:
+- UI plugins
+- Repository plugins
+- Job handler plugins
 
-## What is a Plugin?
+## UI Plugins
 
-There will be many types of custom plugins, but for now we support only UI plugins.
+UI plugins are ReactJS components that implement the IUIPlugin interface, and are used to render entities in a specific way.
 
-### What is a UI plugin?
+You can render an entity, with plugins, by using `<EntityView idReference={entityId} type={typeOfEntity}/>`. `EntityView` is a component exported by the `@development-framwork/dm-core` NPM package. 
 
-Of the many possibilities, but a UI plugins can be to show custom display for certain blueprints.
+If the plugin is correctly registered, this component will then automatically select the correct plugin, and render the entity using that plugin.
+
+Read more about writing and registering a UIPlugin [here](/docs/guides/plugin-development).
+
+## Repository Plugins
+
+Repository plugins are Python modules, used to extends DMSS with the ability to communicate with a specific storage technology.
+The `type`-field of a DataSource repository definition (see [datasources](/docs/concepts/data-sources)) is used to determine which RepositoryPlugin should be used when communicating with the storage backend.
+
+For details on implementing a RepositoryPlugin, see [here](https://github.com/equinor/data-modelling-storage-service?tab=readme-ov-file#repository-plugins)
+
+## Job Handler Plugins
+
+Job handler plugins are Python modules added to DM-Job API. They are used to schedule jobs on some specific infrastructure, or can be a job executor itself.
+
+For details on implementing a JobHandlerPlugin, see [here](https://github.com/equinor/dm-job?tab=readme-ov-file#job-handler-plugins)

@@ -4,21 +4,18 @@ sidebar_position: 4
 ---
 
 In [data modeling storage service](https://github.com/equinor/data-modelling-storage-service) (DMSS), documents (blueprints or entities)
-are stored in a _virtual_ hierarchy of data sources and packages:
+are stored in a _virtual filesystem_ which is a hierarchy with DataSources at the top. You can think of DataSources as drives on a Windows filesystem
 
-* Data source
+* DataSource
   * Root package    
     * document
     * sub package
       * document
         * ...
+* Another datasource
 
-
-This hierarchy does not actually exist in the database, but there exists internal logic in DMSS to create this tree structure. 
-
-
-## Data source
-In the topmost layer we have data sources. A data source is an abstraction layer over one or more _storage repositories_ (can be a Mongo database, Azure file storage, etc).
+## DataSource
+In the topmost layer we have data sources. A data source is an abstraction layer over one or more _storage repository_. A storage repository is a physical storage system (filesystem, SQL-database, NoSQL-Database, cloud object storage, etc.).
 
 To define a data source, we create a json file for it:
 ```json
@@ -39,72 +36,32 @@ To define a data source, we create a json file for it:
 }
 ```
 
-Internally in DMSS, a lookup table is created for each data source. The lookup table looks something like (when using Mongo DB as a storage repository):
+Internally in DMSS, a lookup table is created for each document stored. This content keeps the information on which repository the document is stored in, it's global DMSS ID, and access control information.
 ```json
 {
-  "_id": "system",
-  "name": "system",
-  "repositories": {
-    "a": {
-      "type": "mongo-db",
-      "data_types": null,
-      "host": "db",
-      "port": 27017,
-      "username": "***",
-      "password": "***",
-      "database": "DMSS-core",
-      "collection": "DMSS-core",
-      "account_url": null,
-      "container": null,
-      "tls": false
-    }
-  },
-  "documentLookUp": {
-    "40388758-ee55-46be-bfa6-d3527bc2d12d": {
-      "lookup_id": "40388758-ee55-46be-bfa6-d3527bc2d12d",
-      "repository": "a",
-      "database_id": "40388758-ee55-46be-bfa6-d3527bc2d12d",
-      "acl": {
-        "owner": "dmss-admin",
-        "roles": {
-          "dmss-admin": "WRITE"
-        },
-        "users": {},
-        "others": "READ"
-      },
-      "storage_affinity": "default",
-      "meta": {
-        "created": "2023-08-31 09:06:31.315147"
-      }
+  "lookup_id": "40388758-ee55-46be-bfa6-d3527bc2d12d",
+  "repository": "a",
+  "database_id": "40388758-ee55-46be-bfa6-d3527bc2d12d",
+  "acl": {
+    "owner": "dmss-admin",
+    "roles": {
+      "dmss-admin": "WRITE"
     },
-    "9dfe10a9-b744-46a0-9a47-43a027368b5f": {
-      "lookup_id": "9dfe10a9-b744-46a0-9a47-43a027368b5f",
-      "repository": "a",
-      "database_id": "9dfe10a9-b744-46a0-9a47-43a027368b5f",
-      "acl": {
-        "owner": "dmss-admin",
-        "roles": {
-          "dmss-admin": "WRITE"
-        },
-        "users": {},
-        "others": "READ"
-      },
-      "storage_affinity": "default",
-      "meta": {
-        "created": "2023-08-31 09:06:31.326077"
-      }
-    }
+    "users": {},
+    "others": "READ"
+  },
+  "storage_affinity": "default",
+  "meta": {
+    "created": "2023-08-31 09:06:31.315147"
   }
 }
 ```
 
-Note: as of August 2023, the `lookup_id` and `database_id` are equal, but they don't have to be. DMSS uses the `lookup_id` 
+Note: As of June 2024, the `lookup_id` and `database_id` are equal, but they don't have to be. DMSS uses the `lookup_id` 
 to find the correct document. Internally in the Mongo database, a different id (`database_id`) is used.
 
 Access control for documents is also handled on the data source level.  In the lookup table the acl attribute determines 
 who should have what access to each document.
-
-
 
 ## Packages
 A package is very similar to a folder on your computer's local filesystem. It contains one or more documents (entities, blueprints, sub packages, etc).
@@ -131,4 +88,4 @@ Example of a package entity:
     ]
 }
 ```
-The content list of a package entity is always storage uncontained. 
+The content list of a package entity is always storage uncontained and model contained. 
