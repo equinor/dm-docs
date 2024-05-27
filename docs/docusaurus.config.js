@@ -169,15 +169,6 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Getting started',
-                to: '/docs/getting-started',
-              },
-            ],
-          },
-          {
             title: 'Community',
             items: [
               {
