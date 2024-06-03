@@ -35,6 +35,11 @@ jobs:
       - name: Generate plugin docs
         run: |
           cd docs
+          git clone --depth 1 git@github.com:equinor/dm-core-packages.git
+          mv dm-core-packages/packages/dm-core-plugins/docs ./plugin-docs
+          mkdir --parents ./docs/libraries/@development-framework/dm-core-plugins/
+          cp -R ./plugin-docs/* ./docs/libraries/@development-framework/dm-core-plugins/
+          mv dm-core-packages/packages/dm-core-plugins/blueprints ./plugin-blueprints
           python3 copy_config.py
 
       - name: Build docs

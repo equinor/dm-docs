@@ -2,13 +2,15 @@
 Must be run from "./docs" folder."""
 import os
 import json
-import shutil
 import pathlib
 from textwrap import dedent
+import logging
+logging.basicConfig(level=logging.WARNING, format="%(levelname)s: %(message)s")
+logger = logging.getLogger()
 
 DESTINATION_BASE_FOLDER = './docs/libraries/@development-framework/dm-core-plugins'
-SOURCE_BLUEPRINTS_FOLDER = './node_modules/@development-framework/dm-core-plugins/blueprints'
-SOURCE_DOCS_FOLDER = './node_modules/@development-framework/dm-core-plugins/docs'
+SOURCE_BLUEPRINTS_FOLDER = './plugin-blueprints'
+SOURCE_DOCS_FOLDER = './plugin-docs'
 
 
 def path_to_title(path: str) -> str:
@@ -76,7 +78,7 @@ def create_example_files(plugin, destination_folder_path, base_source_path) -> N
         try:
             os.makedirs(folder_path, exist_ok=True)
         except IOError as make_dir_error:
-            print(f"Unable to create Examples folder for plugin {plugin}. {make_dir_error}")
+            logger.warning(f"Unable to create Examples folder for plugin {plugin}. {make_dir_error}")
 
         # Create example docs
         for example in files:
@@ -99,10 +101,10 @@ import {{ PluginExample }} from '@site/src/components'
 
 {create_code_blocks_section(example_config)}
 """)
-                    print(f"Writing example file {example_file_source_path} --> {folder_path}/{example}.mdx")
+                    logger.info(f"Writing example file {example_file_source_path} --> {folder_path}/{example}.mdx")
                     example_destination_file.write(plugin_demo)
             except IOError as write_example_error:
-                print(f"Unable to write docs file for {example}. {write_example_error}")
+                logger.warning(f"Unable to write docs file for {example}. {write_example_error}")
 
 
 def create_blueprints_file(plugin, docs_source_path, destination_folder_path):
@@ -126,7 +128,7 @@ def create_blueprints_file(plugin, docs_source_path, destination_folder_path):
                         with open(f"{blueprints_source_folder}/{blueprint_file}", "r", encoding="utf-8") as source_file:
                             blueprints.append(json.load(source_file))
                     except IOError as blueprint_file_error:
-                        print(f"Could not read blueprint {blueprint_file} for plugin {plugin}. {blueprint_file_error}")
+                        logger.warning(f"Could not read blueprint {blueprint_file} for plugin {plugin}. {blueprint_file_error}")
              
             try:           
                 with open(destination_filepath, 'w+') as destination_file:
@@ -135,15 +137,15 @@ import {{ BlueprintPreview }} from "@site/src/components"
 
 <BlueprintPreview blueprints={{{json.dumps(blueprints)}}} />
                     """)
-                    print(f"Writing blueprints {docs_source_path} --> {destination_filepath}")
+                    logger.info(f"Writing blueprints {docs_source_path} --> {destination_filepath}")
                     destination_file.write(blueprints_file_content)
                     
             except IOError as e:
-                print(f"Unable to write blueprints file for {plugin}. {e}")
+                logger.warning(f"Unable to write blueprints file for {plugin}. {e}")
                         
             
     except IOError as blueprints_config_file_error:
-        print(f"Could not find blueprints config for plugin {plugin}" + blueprints_config_file_error)
+        logger.warning(f"Could not find blueprints config for plugin {plugin}" + str(blueprints_config_file_error))
 
 
 def copy_doc_files(plugin, docs_source_path, destination_folder_path):
@@ -164,12 +166,12 @@ def copy_doc_files(plugin, docs_source_path, destination_folder_path):
                     title: {plugin}
                     sidebar_label: Documentation
                     ---\n\n""")
-                    print(f"Writing docs file {documentation_file_path} --> {destination_folder_path}/Documentation.md")
+                    logger.info(f"Writing docs file {documentation_file_path} --> {destination_folder_path}/Documentation.md")
                     destination_file.write(header_content + contents)
             except IOError as e:
-                print(f"Unable to write docs file for {plugin}. {e}")
+                logger.warning(f"Unable to write docs file for {plugin}. {e}")
     except IOError:
-        print(f"No documentation source file found for plugin {plugin}")
+        logger.error(f"No documentation source file found for plugin {plugin}")
 
 
 def create_docs():
@@ -184,15 +186,12 @@ def create_docs():
     try:
         plugins = [os.path.basename(x) for x in pathlib.Path().glob(f'{SOURCE_DOCS_FOLDER}/*')]
         if not plugins:
-            print(f"No plugins found in {SOURCE_DOCS_FOLDER} folder. Run 'yarn install' to create 'node_modules'.")
-            print("Exiting...")
+            logger.error(f"No plugins found in {SOURCE_DOCS_FOLDER} folder. Run 'yarn install' to create 'node_modules'.")
+            logger.error("Exiting...")
             exit(2)
 
-        if os.path.exists(DESTINATION_BASE_FOLDER):
-            shutil.rmtree(DESTINATION_BASE_FOLDER)
-
         for plugin in plugins:
-            print(f"Creating docs for {plugin}")
+            logger.info(f"Creating docs for {plugin}")
             # Define the source and destination paths
             docs_source_path = f'{SOURCE_DOCS_FOLDER}/{plugin}'
             destination_folder_path = f'{DESTINATION_BASE_FOLDER}/{plugin}'
@@ -208,7 +207,7 @@ def create_docs():
             copy_doc_files(plugin, docs_source_path, destination_folder_path)
             
     except IOError as e:
-        print(f"Could not auto-generate documentation. {e}")
+        logger.error(f"Could not auto-generate documentation. {e}")
 
 if __name__ == "__main__":
     create_docs()
