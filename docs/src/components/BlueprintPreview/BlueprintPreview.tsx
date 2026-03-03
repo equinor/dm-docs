@@ -1,15 +1,15 @@
+import type { TBlueprint } from '@development-framework/dm-core'
 import {
   Autocomplete,
-  AutocompleteChanges,
+  type AutocompleteChanges,
   EdsProvider,
   Radio,
   Table,
 } from '@equinor/eds-core-react'
-import React, { useState } from 'react'
 import CodeBlock from '@theme/CodeBlock'
-import styled from 'styled-components'
-import { TBlueprint } from '@development-framework/dm-core'
+import React, { useState } from 'react'
 import { GrFormCheckmark } from 'react-icons/gr'
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   display: flex;

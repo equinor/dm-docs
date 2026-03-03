@@ -1,4 +1,4 @@
-import { TParameterInfo } from './types'
+import type { TParameterInfo } from './types'
 
 export const findBlockByTag = (tag: string, typeDoc: any): any => {
   const comment = typeDoc.comment ?? typeDoc.signatures[0]?.comment ?? {}
@@ -30,10 +30,12 @@ export const getParameters = (typeDoc: any) => {
   if (typeDoc.signatures && typeDoc.signatures.length >= 1) {
     // Functions
     return typeDoc.signatures[0].parameters
-  } else if (typeDoc.type?.declaration?.children) {
+  }
+  if (typeDoc.type?.declaration?.children) {
     // Types
     return typeDoc.type.declaration.children
-  } else if (typeDoc.children) {
+  }
+  if (typeDoc.children) {
     // Enums
     return typeDoc.children
   }

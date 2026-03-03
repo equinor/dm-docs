@@ -1,5 +1,5 @@
-import React from 'react'
 import Admonition from '@theme/Admonition'
+import React from 'react'
 
 export const ErrorGroup = (props: { name: string }) => (
   <>

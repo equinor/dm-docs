@@ -1,10 +1,11 @@
-import React, { Suspense } from 'react'
-import DMTPlugins from '@development-framework/dm-core-plugins'
 import {
   ApplicationContext,
   ErrorGroup,
-  IUIPlugin,
+  type IUIPlugin,
 } from '@development-framework/dm-core'
+import DMTPlugins from '@development-framework/dm-core-plugins'
+import type React from 'react'
+import { Suspense } from 'react'
 import styled from 'styled-components'
 
 type TPluginExample = {

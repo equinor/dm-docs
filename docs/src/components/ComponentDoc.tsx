@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Summary, Parameters, Returns, ExampleUsage, ErrorGroup } from './index'
+import { ErrorGroup, ExampleUsage, Parameters, Returns, Summary } from './index'
 
 // @ts-ignore
 import typeDocs from './typedocs.json'
