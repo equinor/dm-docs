@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { LiveProvider, LiveEditor, LivePreview, LiveError } from 'react-live'
-import { themes } from 'prism-react-renderer'
 import { useColorMode } from '@docusaurus/theme-common'
+import { themes } from 'prism-react-renderer'
+import React, { useEffect, useState } from 'react'
+import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live'
 
-import { ErrorGroup } from './ErrorGroup'
 import { findBlockByTag } from '../utils'
+import { ErrorGroup } from './ErrorGroup'
 
 type ExampleUsageProps = {
   typeDoc: any

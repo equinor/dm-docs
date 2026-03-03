@@ -6,7 +6,7 @@
 }
 :after:where(.dm-preflight, .dm-preflight *),
 :before:where(.dm-preflight, .dm-preflight *) {
-  --tw-content: '';
+  --tw-content: "";
 }
 .dm-preflight {
   line-height: 1.5;
@@ -51,15 +51,8 @@ code:where(.dm-preflight, .dm-preflight *),
 kbd:where(.dm-preflight, .dm-preflight *),
 pre:where(.dm-preflight, .dm-preflight *),
 samp:where(.dm-preflight, .dm-preflight *) {
-  font-family:
-    ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    Monaco,
-    Consolas,
-    Liberation Mono,
-    Courier New,
-    monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation
+    Mono, Courier New, monospace;
   font-feature-settings: normal;
   font-variation-settings: normal;
   font-size: 1em;
@@ -106,9 +99,9 @@ select:where(.dm-preflight, .dm-preflight *) {
   text-transform: none;
 }
 button:where(.dm-preflight, .dm-preflight *),
-input:where([type='button']):where(.dm-preflight, .dm-preflight *),
-input:where([type='reset']):where(.dm-preflight, .dm-preflight *),
-input:where([type='submit']):where(.dm-preflight, .dm-preflight *) {
+input:where([type="button"]):where(.dm-preflight, .dm-preflight *),
+input:where([type="reset"]):where(.dm-preflight, .dm-preflight *),
+input:where([type="submit"]):where(.dm-preflight, .dm-preflight *) {
   -webkit-appearance: button;
   background-color: initial;
   background-image: none;
@@ -126,7 +119,7 @@ progress:where(.dm-preflight, .dm-preflight *) {
 ::-webkit-outer-spin-button:where(.dm-preflight, .dm-preflight *) {
   height: auto;
 }
-[type='search']:where(.dm-preflight, .dm-preflight *) {
+[type="search"]:where(.dm-preflight, .dm-preflight *) {
   -webkit-appearance: textfield;
   outline-offset: -2px;
 }
@@ -185,7 +178,7 @@ textarea::placeholder:where(.dm-preflight, .dm-preflight *) {
   opacity: 1;
   color: #9ca3af;
 }
-[role='button']:where(.dm-preflight, .dm-preflight *),
+[role="button"]:where(.dm-preflight, .dm-preflight *),
 button:where(.dm-preflight, .dm-preflight *) {
   cursor: pointer;
 }
@@ -745,8 +738,8 @@ video:where(.dm-preflight, .dm-preflight *) {
 }
 .shadow {
   --tw-shadow: 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color),
-    0 1px 2px -1px var(--tw-shadow-color);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px
+    var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
@@ -760,34 +753,15 @@ video:where(.dm-preflight, .dm-preflight *) {
     var(--tw-sepia) var(--tw-drop-shadow);
 }
 .transition {
-  transition-property:
-    color,
-    background-color,
-    border-color,
-    text-decoration-color,
-    fill,
-    stroke,
-    opacity,
-    box-shadow,
-    transform,
-    filter,
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
     -webkit-backdrop-filter;
   transition-property: color, background-color, border-color,
     text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
     backdrop-filter;
-  transition-property:
-    color,
-    background-color,
-    border-color,
-    text-decoration-color,
-    fill,
-    stroke,
-    opacity,
-    box-shadow,
-    transform,
-    filter,
-    backdrop-filter,
-    -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 0.15s;
 }

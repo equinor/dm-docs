@@ -1,5 +1,5 @@
 import React from 'react'
-import { TComponentDocPartProps } from '../types'
+import type { TComponentDocPartProps } from '../types'
 import { findBlockByTag } from '../utils'
 
 export const Returns = (props: TComponentDocPartProps) => {

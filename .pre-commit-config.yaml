@@ -29,30 +29,9 @@ repos:
       - id: conventional-pre-commit
         stages: [commit-msg]
 
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.2
+  - repo: https://github.com/biomejs/pre-commit
+    rev: "v0.6.1"
     hooks:
-      - id: prettier
-        files: ^docs/.*\.(ts|tsx|js|css|html)$
-        args:
-          ["--config=docs/.prettierrc.js", "--ignore-path=docs/.prettierignore"]
-
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: "v8.56.0"
-    hooks:
-      - id: eslint
-        files: \.[jt]sx?$ # *.js, *.jsx, *.ts and *.tsx
-        types: [file]
-        additional_dependencies:
-          - eslint@8.56.0
-          - eslint-config-react-app
-          - typescript
-          - "@typescript-eslint/parser"
-          - "@typescript-eslint/eslint-plugin"
-          - eslint-config-prettier # turns off all rules that might conflict with prettier
-          - eslint-plugin-jsx-a11y # checks accessibility rules on jsx elements
-          - eslint-plugin-prettier # runs prettier as an eslint rule
-          - eslint-plugin-react # react specific linting rules
-          - eslint-plugin-react-hooks # enforces the rules of hooks
-        args:
-          ["--config=docs/.eslintrc.json", "--ignore-path=docs/.eslintignore"]
+      - id: biome-check
+        additional_dependencies: ["@biomejs/biome@1.9.0"]
+        files: ^docs/.*\.[jt]sx?$

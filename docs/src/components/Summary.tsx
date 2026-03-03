@@ -1,5 +1,5 @@
 import React from 'react'
-import { TComponentDocPartProps } from '../types'
+import type { TComponentDocPartProps } from '../types'
 
 export const Summary = (props: TComponentDocPartProps) => {
   const { typeDoc } = props

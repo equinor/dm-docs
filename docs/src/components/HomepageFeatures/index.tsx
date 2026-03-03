@@ -1,9 +1,9 @@
-import React from 'react'
-import clsx from 'clsx'
-import styles from './styles.module.css'
 import Link from '@docusaurus/Link'
 import { Icon } from '@equinor/eds-core-react'
-import { launch, widgets, build_wrench, apps } from '@equinor/eds-icons'
+import { apps, build_wrench, launch, widgets } from '@equinor/eds-icons'
+import clsx from 'clsx'
+import type React from 'react'
+import styles from './styles.module.css'
 
 Icon.add({ launch, widgets, build_wrench, apps })
 
@@ -60,8 +60,8 @@ export default function HomepageFeatures(): JSX.Element {
     <section className={styles.features}>
       <div className="container">
         <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
+          {FeatureList.map((props) => (
+            <Feature key={props.title} {...props} />
           ))}
         </div>
       </div>

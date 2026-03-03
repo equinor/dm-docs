@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const fs = require('fs')
-const TypeDoc = require('typedoc')
-const { exit } = require('process')
+const fs = require('node:fs')
+const { exit } = require('node:process')
 
 // Path to write the typedocs to
 const typeDocsOutPath = './src/components/typedocs.json'
@@ -28,6 +27,7 @@ const libraries = {
  * @param {string} tsConfig Path to the tsconfig.json for the given library
  */
 async function generate_json(entryPoints, tsConfig) {
+  const TypeDoc = await import('typedoc')
   console.log(entryPoints)
 
   const app = await TypeDoc.Application.bootstrap({
@@ -90,7 +90,7 @@ export const scope = { ${componentName} }
     if (!fs.existsSync(librarySubDirectory))
       fs.mkdirSync(librarySubDirectory, { recursive: true })
   } catch (e) {
-    console.error(`An error occurred while creating the library directory:`)
+    console.error('An error occurred while creating the library directory:')
     console.error(e)
   }
 
@@ -117,10 +117,10 @@ async function main() {
       // Import the typeDocs JSON file
       const typeDocs = require(typeDocsOutPath)
       // Loop over each child
-      typeDocs.children?.forEach((component) => {
+      for (const component of typeDocs.children ?? []) {
         const componentName = component.name
         try {
-          if (!component.signatures && !component.comment) return
+          if (!component.signatures && !component.comment) continue
 
           // Get the comment
           const comment =
@@ -130,7 +130,7 @@ async function main() {
           const docsBlockTag = comment.blockTags.find(
             (blockTag) => blockTag.tag === '@docs'
           )
-          if (!docsBlockTag) return
+          if (!docsBlockTag) continue
 
           // Retrieve the string value of the @docs tag, representing the directory in which the component should be
           const componentType = docsBlockTag.content.find(
@@ -138,10 +138,10 @@ async function main() {
           )?.text
           // Write the MDX to disk
           write_mdx_file(library, componentName, componentType)
-        } catch (e) {
-          return
+        } catch (_e) {
+          // ignore errors for individual components
         }
-      })
+      }
     } else {
       console.warn(`The file '${typeDocsOutPath}' does not exist.`)
     }

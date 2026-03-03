@@ -1,5 +1,5 @@
 import React from 'react'
-import { TComponentDocPartProps } from '../types'
+import type { TComponentDocPartProps } from '../types'
 import { extractParameterInfo, getParameters } from '../utils'
 import { Table } from './Table'
 
@@ -31,7 +31,7 @@ export const Parameters = (props: TComponentDocPartProps) => {
           'children'
         )
           ? reference.children
-          : reference.type.declaration.children ?? []
+          : (reference.type.declaration.children ?? [])
         referenceChildren.forEach((child: any, _index: number) => {
           const row: TTableRow = {
             _id: `${_index}`,
