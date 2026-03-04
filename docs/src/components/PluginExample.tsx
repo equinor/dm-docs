@@ -4,6 +4,7 @@ import {
   type IUIPlugin,
 } from '@development-framework/dm-core'
 import DMTPlugins from '@development-framework/dm-core-plugins'
+import BrowserOnly from '@docusaurus/BrowserOnly'
 import type React from 'react'
 import { Suspense } from 'react'
 import styled from 'styled-components'
@@ -112,10 +113,14 @@ export const PluginPreview = ({ exampleConfig }: TPluginExample) => {
 
 export const PluginExample = (props: TPluginExample) => {
   return (
-    <Suspense fallback={<span />}>
-      <DemoWrapper className="dm-preflight">
-        <PluginPreview {...props} />
-      </DemoWrapper>
-    </Suspense>
+    <BrowserOnly fallback={<span>Loading plugin preview...</span>}>
+      {() => (
+        <Suspense fallback={<span />}>
+          <DemoWrapper className="dm-preflight">
+            <PluginPreview {...props} />
+          </DemoWrapper>
+        </Suspense>
+      )}
+    </BrowserOnly>
   )
 }
