@@ -28,27 +28,39 @@ def create_code_blocks_section(example_config):
     child_blueprints = ""
     if "childBlueprints" in example_config:
         for child_blueprint in example_config["childBlueprints"]:
-            child_blueprints += create_json_code_block(child_blueprint["name"], "blueprint", child_blueprint)
+            child_blueprints += create_json_code_block(child_blueprint.get("name", "blueprint"), "blueprint", child_blueprint)
 
-    code_block = dedent(f"""
-{create_json_code_block(example_config["recipe"]["name"], "recipe", example_config["recipe"])}
-{create_json_code_block(example_config["blueprint"]["name"], "blueprint", example_config["blueprint"])}
-{child_blueprints}
-{create_json_code_block(example_config["entityFilePrefix"], "entity", example_config["entity"])}
-""")
+    recipe = example_config.get("recipe", {})
+    blueprint = example_config.get("blueprint", {})
+    entity = example_config.get("entity", {})
+    entity_prefix = example_config.get("entityFilePrefix", "entity")
+
+    sections = []
+    if recipe:
+        sections.append(create_json_code_block(recipe.get("name", "recipe"), "recipe", recipe))
+    if blueprint:
+        sections.append(create_json_code_block(blueprint.get("name", "blueprint"), "blueprint", blueprint))
+    if child_blueprints:
+        sections.append(child_blueprints)
+    if entity:
+        sections.append(create_json_code_block(entity_prefix, "entity", entity))
+
+    code_block = "\n".join(sections)
     return code_block
 
 
 def create_info_block(example_config):
     """Create text block for description and/or note"""
     additional_info = ""
-    if example_config["description"]:
-        additional_info += example_config["description"]
-    if example_config["note"]:
+    description = example_config.get("description", "")
+    note = example_config.get("note", "")
+    if description:
+        additional_info += description
+    if note:
         additional_info += dedent(f"""
         :::note
         
-        {example_config["note"]}
+        {note}
         
         :::
         """)
@@ -57,7 +69,7 @@ def create_info_block(example_config):
 
 def create_demo_block(example_config):
     """Create block for demo example or note if not available"""
-    if example_config["showDemo"]:
+    if example_config.get("showDemo", False):
         return f"<PluginExample exampleConfig={{{json.dumps(example_config)}}} />"
     return dedent("""
         :::note
@@ -87,10 +99,16 @@ def create_example_files(plugin, destination_folder_path, base_source_path) -> N
             try:
                 with open(example_file_source_path, 'r', encoding="utf-8") as example_source_file:
                     example_config = json.load(example_source_file)
+
+                expected_keys = {"title", "description", "note", "showDemo", "recipe", "blueprint", "entity", "entityFilePrefix"}
+                missing_keys = expected_keys - example_config.keys()
+                if missing_keys:
+                    logger.warning(f"Example config '{example_file_source_path}' is missing keys: {missing_keys}")
+
                 with open(f'{folder_path}/{example}.mdx', 'a+', encoding="utf-8") as example_destination_file:
                     plugin_demo = dedent(f"""\
 ---
-title: {example_config['title']}
+title: {example_config.get('title', example)}
 ---
 
 import {{ PluginExample }} from '@site/src/components'
