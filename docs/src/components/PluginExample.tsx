@@ -4,6 +4,7 @@ import {
   type IUIPlugin,
 } from '@development-framework/dm-core'
 import DMTPlugins from '@development-framework/dm-core-plugins'
+import BrowserOnly from '@docusaurus/BrowserOnly'
 import type React from 'react'
 import { Suspense } from 'react'
 import styled from 'styled-components'
@@ -64,7 +65,11 @@ export const PluginPreview = ({ exampleConfig }: TPluginExample) => {
   const { entity, blueprint, recipe, scope } = exampleConfig
 
   const dmssAPI = {
+    // Small delay ensures useBlueprint (useEffect+setState) resolves before
+    // useDocument (react-query), preventing a race condition where dimensions
+    // default to "*,*" (multi-dimensional) while data is actually 1D.
     documentGet: async () => {
+      await new Promise((resolve) => setTimeout(resolve, 50))
       return { data: scope ? entity[scope] : entity }
     },
     blueprintGet: async () => ({ data: { blueprint } }),
@@ -103,7 +108,7 @@ export const PluginPreview = ({ exampleConfig }: TPluginExample) => {
   }
 
   return (
-    /* @ts-expect-error*/
+    // @ts-expect-error
     <ApplicationContext.Provider value={{ dmssAPI, getUiPlugin }}>
       <UIPlugin type="" idReference="example" config={recipe?.config} />
     </ApplicationContext.Provider>
@@ -112,10 +117,14 @@ export const PluginPreview = ({ exampleConfig }: TPluginExample) => {
 
 export const PluginExample = (props: TPluginExample) => {
   return (
-    <Suspense fallback={<span />}>
-      <DemoWrapper className="dm-preflight">
-        <PluginPreview {...props} />
-      </DemoWrapper>
-    </Suspense>
+    <BrowserOnly fallback={<span>Loading plugin preview...</span>}>
+      {() => (
+        <Suspense fallback={<span />}>
+          <DemoWrapper className="dm-preflight">
+            <PluginPreview {...props} />
+          </DemoWrapper>
+        </Suspense>
+      )}
+    </BrowserOnly>
   )
 }

@@ -4,7 +4,6 @@
 import { realpathSync } from "fs";
 import { resolve as _resolve, join } from "path";
 import { themes } from "prism-react-renderer";
-import ModuleScopePlugin from "react-dev-utils/ModuleScopePlugin";
 import { ProvidePlugin } from "webpack";
 const clientDir = join(__dirname, "..", "client");
 
@@ -70,7 +69,7 @@ const config = {
 			name: "webpack-configuration-plugin",
 			configureWebpack(config, isServer, utils) {
 				config.plugins = config.plugins.filter(
-					(plugin) => !(plugin instanceof ModuleScopePlugin),
+					(plugin) => plugin.constructor?.name !== "ModuleScopePlugin",
 				);
 				const rule = config.module.rules[5];
 				// @ts-ignore
@@ -97,6 +96,10 @@ const config = {
 					__dirname,
 					"./node_modules/react-dom",
 				);
+				config.resolve.alias["@tanstack/react-query"] = _resolve(
+					__dirname,
+					"./node_modules/@tanstack/react-query",
+				);
 				config.plugins.push(
 					new ProvidePlugin({
 						process: "process/browser.js",
@@ -106,6 +109,7 @@ const config = {
 					resolve: {
 						fallback: {
 							path: require.resolve("path-browserify"),
+							url: require.resolve("url/"),
 							fs: false,
 						},
 						symlinks: true,

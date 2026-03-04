@@ -23,15 +23,21 @@ export const Parameters = (props: TComponentDocPartProps) => {
   parameters.forEach((parameter: any, index: number) => {
     if (parameter.type.type === 'reference') {
       try {
-        const reference = typeDocs.children.find(
+        const reference = typeDocs?.children?.find(
           (child: any) => child.id === parameter.type.id
         )
+        if (!reference) {
+          console.warn(
+            `Could not find reference for parameter type id: ${parameter.type.id}`
+          )
+          return
+        }
         const referenceChildren = Object.prototype.hasOwnProperty.call(
           reference,
           'children'
         )
           ? reference.children
-          : (reference.type.declaration.children ?? [])
+          : (reference.type?.declaration?.children ?? [])
         referenceChildren.forEach((child: any, _index: number) => {
           const row: TTableRow = {
             _id: `${_index}`,
