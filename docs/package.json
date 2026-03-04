@@ -58,7 +58,7 @@
     "@docusaurus/tsconfig": "^3.9.2",
     "@testing-library/react": "^14.2.2",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.11.30",
+    "@types/node": "^25.3.3",
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
     "@types/react-router-dom": "^5.3.3",
