@@ -16,7 +16,7 @@ const libraries = {
     entryPoints: [
       './node_modules/@development-framework/dm-core/src/index.tsx',
     ],
-    tsConfig: './node_modules/@development-framework/dm-core/tsconfig.json',
+    tsConfig: 'tsconfig.typedoc.json',
   },
 }
 
