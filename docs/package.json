@@ -25,7 +25,7 @@
     "@docusaurus/preset-classic": "^3.9.2",
     "@docusaurus/theme-live-codeblock": "^3.9.2",
     "@docusaurus/theme-mermaid": "^3.9.2",
-    "@equinor/eds-core-react": "^0.36.1",
+    "@equinor/eds-core-react": "^2.3.7",
     "@equinor/eds-icons": "^0.21.0",
     "@equinor/eds-tokens": "^2.2.0",
     "@mdx-js/react": "^3.1.1",
