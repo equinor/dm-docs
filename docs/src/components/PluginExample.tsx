@@ -5,12 +5,9 @@ import {
 } from '@development-framework/dm-core'
 import DMTPlugins from '@development-framework/dm-core-plugins'
 import BrowserOnly from '@docusaurus/BrowserOnly'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type React from 'react'
 import { Suspense } from 'react'
 import styled from 'styled-components'
-
-const queryClient = new QueryClient()
 
 type TPluginExample = {
   exampleConfig: {
@@ -107,12 +104,10 @@ export const PluginPreview = ({ exampleConfig }: TPluginExample) => {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      {/* @ts-expect-error*/}
-      <ApplicationContext.Provider value={{ dmssAPI, getUiPlugin }}>
-        <UIPlugin type="" idReference="example" config={recipe?.config} />
-      </ApplicationContext.Provider>
-    </QueryClientProvider>
+    // @ts-expect-error
+    <ApplicationContext.Provider value={{ dmssAPI, getUiPlugin }}>
+      <UIPlugin type="" idReference="example" config={recipe?.config} />
+    </ApplicationContext.Provider>
   )
 }
 
