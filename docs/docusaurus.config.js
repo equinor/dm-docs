@@ -106,6 +106,7 @@ const config = {
 					resolve: {
 						fallback: {
 							path: require.resolve("path-browserify"),
+							url: require.resolve("url/"),
 							fs: false,
 						},
 						symlinks: true,

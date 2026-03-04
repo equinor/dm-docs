@@ -49,7 +49,8 @@
     "react-notifications": "^1.7.4",
     "react-router-dom": "^6.22.3",
     "styled-components": "^6.3.11",
-    "swizzle": "1.1.0"
+    "swizzle": "1.1.0",
+    "url": "^0.11.4"
   },
   "devDependencies": {
     "@babel/preset-flow": "^7.27.1",
