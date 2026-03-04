@@ -1,4 +1,5 @@
 import type { TBlueprint } from '@development-framework/dm-core'
+import BrowserOnly from '@docusaurus/BrowserOnly'
 import {
   Autocomplete,
   type AutocompleteChanges,
@@ -24,7 +25,7 @@ const ControlsWrapper = styled.div`
   justify-content: space-between;
 `
 
-export const BlueprintPreview = (props: { blueprints: TBlueprint[] }) => {
+const BlueprintPreviewInner = (props: { blueprints: TBlueprint[] }) => {
   const { blueprints } = props
   const [previewType, setPreviewType] = useState<'table' | 'json'>('table')
   const [selectedItems, setSelectedItems] = useState<string[]>([
@@ -133,5 +134,13 @@ export const BlueprintPreview = (props: { blueprints: TBlueprint[] }) => {
         </CodeBlock>
       )}
     </Wrapper>
+  )
+}
+
+export const BlueprintPreview = (props: { blueprints: TBlueprint[] }) => {
+  return (
+    <BrowserOnly fallback={<span>Loading blueprint preview...</span>}>
+      {() => <BlueprintPreviewInner {...props} />}
+    </BrowserOnly>
   )
 }
