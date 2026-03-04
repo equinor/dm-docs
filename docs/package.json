@@ -48,7 +48,7 @@
     "react-live": "^4.1.8",
     "react-notifications": "^1.7.4",
     "react-router-dom": "^6.22.3",
-    "styled-components": "^5.2.3",
+    "styled-components": "^6.3.11",
     "swizzle": "1.1.0"
   },
   "devDependencies": {
