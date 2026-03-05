@@ -46,7 +46,7 @@
     "react-is": "^19.2.4",
     "react-live": "^4.1.8",
     "react-notifications": "^1.7.4",
-    "react-router-dom": "^6.22.3",
+    "react-router-dom": "^7.13.1",
     "styled-components": "^6.3.11",
     "swizzle": "1.1.0",
     "url": "^0.11.4"
