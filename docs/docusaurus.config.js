@@ -96,6 +96,10 @@ const config = {
 					__dirname,
 					"./node_modules/react-dom",
 				);
+				config.resolve.alias["@tanstack/react-query"] = _resolve(
+					__dirname,
+					"./node_modules/@tanstack/react-query",
+				);
 				config.plugins.push(
 					new ProvidePlugin({
 						process: "process/browser.js",

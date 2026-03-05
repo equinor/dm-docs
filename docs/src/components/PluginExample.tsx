@@ -65,7 +65,11 @@ export const PluginPreview = ({ exampleConfig }: TPluginExample) => {
   const { entity, blueprint, recipe, scope } = exampleConfig
 
   const dmssAPI = {
+    // Small delay ensures useBlueprint (useEffect+setState) resolves before
+    // useDocument (react-query), preventing a race condition where dimensions
+    // default to "*,*" (multi-dimensional) while data is actually 1D.
     documentGet: async () => {
+      await new Promise((resolve) => setTimeout(resolve, 50))
       return { data: scope ? entity[scope] : entity }
     },
     blueprintGet: async () => ({ data: { blueprint } }),
