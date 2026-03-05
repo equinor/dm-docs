@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('node:fs')
+const path = require('node:path')
 const { exit } = require('node:process')
 
 // Path to write the typedocs to
@@ -104,11 +105,44 @@ export const scope = { ${componentName} }
   })
 }
 
+/**
+ * Read the installed version of a package and write a _category_.yaml
+ * so that the sidebar label includes the version number.
+ *
+ * @param {string} libraryName  e.g. '@development-framework/dm-core'
+ */
+function write_version_category(libraryName) {
+  try {
+    const pkgJsonPath = path.join('node_modules', libraryName, 'package.json')
+    const { version } = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf-8'))
+    // e.g. '@development-framework/dm-core' -> 'dm-core'
+    const shortName = libraryName.split('/').pop()
+    const categoryDir = path.join(mdxBaseDirectory, libraryName)
+    if (!fs.existsSync(categoryDir)) {
+      fs.mkdirSync(categoryDir, { recursive: true })
+    }
+    const categoryPath = path.join(categoryDir, '_category_.yaml')
+    const yaml = `label: '${shortName} (v${version})'\ncollapsed: true\n`
+    fs.writeFileSync(categoryPath, yaml)
+    console.log(
+      `Wrote sidebar label '${shortName} (v${version})' to '${categoryPath}'`
+    )
+  } catch (err) {
+    console.warn(
+      `Could not write version category for '${libraryName}':`,
+      err.message
+    )
+  }
+}
+
 async function main() {
   for (const library of Object.keys(libraries)) {
     console.log(`=== Generating docs for '${library}'...`)
     const entryPoints = libraries[library].entryPoints
     const tsConfig = libraries[library].tsConfig
+
+    // Write a _category_.yaml with the package version in the sidebar label
+    write_version_category(library)
 
     // Generate typedocs
     await generate_json(entryPoints, tsConfig).catch(console.error)
