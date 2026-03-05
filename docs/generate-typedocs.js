@@ -11,6 +11,12 @@ const mdxBaseDirectory = './docs/libraries'
 // Which component types should have a 'live preview' of the example code
 const codePreviewComponentTypes = ['Components']
 
+// All packages that should display their version in the sidebar
+const versionedPackages = [
+  '@development-framework/dm-core',
+  '@development-framework/dm-core-plugins',
+]
+
 // The libraries that should be documented
 const libraries = {
   '@development-framework/dm-core': {
@@ -136,13 +142,15 @@ function write_version_category(libraryName) {
 }
 
 async function main() {
+  // Write version labels for all packages in the sidebar
+  for (const pkg of versionedPackages) {
+    write_version_category(pkg)
+  }
+
   for (const library of Object.keys(libraries)) {
     console.log(`=== Generating docs for '${library}'...`)
     const entryPoints = libraries[library].entryPoints
     const tsConfig = libraries[library].tsConfig
-
-    // Write a _category_.yaml with the package version in the sidebar label
-    write_version_category(library)
 
     // Generate typedocs
     await generate_json(entryPoints, tsConfig).catch(console.error)
