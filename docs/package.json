@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@babel/preset-flow": "^7.27.1",
-    "@biomejs/biome": "^1.9.0",
+    "@biomejs/biome": "^2.4.5",
     "@docusaurus/module-type-aliases": "^3.1.0",
     "@docusaurus/tsconfig": "^3.9.2",
     "@testing-library/react": "^14.2.2",
