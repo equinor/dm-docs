@@ -19,8 +19,8 @@
     "format": "biome format --write ."
   },
   "dependencies": {
-    "@development-framework/dm-core": "^1.46.4",
-    "@development-framework/dm-core-plugins": "^1.60.0",
+    "@development-framework/dm-core": "^1.46.5",
+    "@development-framework/dm-core-plugins": "^1.60.1",
     "@docusaurus/core": "^3.9.2",
     "@docusaurus/preset-classic": "^3.9.2",
     "@docusaurus/theme-live-codeblock": "^3.9.2",
@@ -62,7 +62,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/react-router-dom": "^5.3.3",
-    "@types/styled-components": "^5.1.34",
+    "@types/styled-components": "^5.1.36",
     "docusaurus-plugin-typedoc": "^1.4.2",
     "process": "^0.11.10",
     "react-docgen-typescript": "2.4.0",
