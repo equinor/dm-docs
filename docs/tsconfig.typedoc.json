@@ -1,6 +1,16 @@
 {
   "extends": "./node_modules/@development-framework/dm-core/tsconfig.json",
   "compilerOptions": {
-    "noImplicitAny": false
-  }
+    "noImplicitAny": false,
+    "skipLibCheck": true
+  },
+  "include": [
+    "node_modules/@development-framework/dm-core/src"
+  ],
+  "exclude": [
+    "node_modules/@development-framework/dm-core/src/**/*.test.ts",
+    "node_modules/@development-framework/dm-core/src/**/*.test.tsx",
+    "node_modules/@development-framework/dm-core/src/**/*.spec.ts",
+    "node_modules/@development-framework/dm-core/src/**/*.spec.tsx"
+  ]
 }
