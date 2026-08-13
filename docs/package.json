@@ -16,8 +16,8 @@
     "generate-typedocs": "node generate-typedocs.js"
   },
   "dependencies": {
-    "@development-framework/dm-core": "^1.46.2",
-    "@development-framework/dm-core-plugins": "^1.59.0",
+    "@development-framework/dm-core": "^1.46.6",
+    "@development-framework/dm-core-plugins": "^1.60.2",
     "@docusaurus/core": "^3.1.1",
     "@docusaurus/preset-classic": "^3.1.0",
     "@docusaurus/theme-live-codeblock": "^3.1.0",
